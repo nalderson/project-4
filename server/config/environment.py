@@ -1,0 +1,2 @@
+db_URI = 'postgres://localhost:5432/photo-db'
+secret = 'jollyfrancesausagescreenforhappyflaskpigletwinbabyphotoslideorangeinkcreampowercrimpmugflaskhingegasketwindowboxcandorsquashteadesignbill'
