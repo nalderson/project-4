@@ -11,7 +11,10 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
         load_only = ('email', 'password')
 
     password = fields.String(required=True)
+    photos = fields.Nested('PhotoSchema', many=True)
 
-class SimpleUserSchema(ma.SQLAlchemyAutoSchema):class Meta:
+class SimpleUserSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
         model = User
         load_instance = True
+        exclude = ('password_hash', 'email')

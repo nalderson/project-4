@@ -16,7 +16,7 @@ class User(db.Model, BaseModel):
     password_hash = db.Column(db.String(128), nullable=True)
  
     comments = db.relationship('Comment', backref='user', cascade='all, delete')
-    photos = db.relationship('Photos', backref='user', cascade='all, delete')
+    photos = db.relationship('Photo', backref='user', cascade='all, delete')
 
 
     @hybrid_property

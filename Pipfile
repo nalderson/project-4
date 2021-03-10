@@ -15,6 +15,7 @@ flask-bcrypt = "*"
 pyjwt = "*"
 marshmallow = "*"
 pprint = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.9"
