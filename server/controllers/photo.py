@@ -6,6 +6,8 @@ from decorators.secure_route import secure_route
 from serializers.comment import CommentSchema
 from marshmallow.exceptions import ValidationError
 
+# * These are our photo controllers, they give access to the API through routes, such as 'get all photos', 'get single photo' etc
+
 router = Blueprint(__name__, "photos")
 
 @router.route("/photos", methods=["GET"])

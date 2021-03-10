@@ -4,6 +4,8 @@ from serializers.user import UserSchema
 from marshmallow.exceptions import ValidationError
 from decorators.secure_route import secure_route
 
+#  * These are our user controllers, sign up, login and get single user profile
+
 user_schema = UserSchema()
 
 router = Blueprint(__name__, "users")

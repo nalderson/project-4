@@ -1,11 +1,12 @@
 from app import db, bcrypt
 from models.base import BaseModel
-
+from sqlalchemy.orm import validates
 from sqlalchemy.ext.hybrid import hybrid_property
 import jwt
 from datetime import *
 from config.environment import secret
 
+# * This is our user model including methods to set, encode, and verify password
 
 class User(db.Model, BaseModel):
 
@@ -28,7 +29,11 @@ class User(db.Model, BaseModel):
         encoded_pw = bcrypt.generate_password_hash(password_plaintext)
         self.password_hash = encoded_pw.decode('utf-8')
 
-
+    @validates('email')
+    def validate_email(self, key, address):
+        assert '@' in address, "You must have a valid email address"
+        return address
+    
     def validate_password(self, password_plaintext):
         return bcrypt.check_password_hash(self.password_hash, password_plaintext)
 
