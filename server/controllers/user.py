@@ -44,3 +44,4 @@ def login():
 @secure_route
 def get_user_profile():
     return user_schema.jsonify(g.current_user)
+

@@ -17,6 +17,8 @@ class User(db.Model, BaseModel):
  
     comments = db.relationship('Comment', backref='user', cascade='all, delete')
     photos = db.relationship('Photo', backref='user', cascade='all, delete')
+    following = db.relationship('Following', backref='user', cascade='all, delete')
+    followers = db.relationship('Follower', backref='user', cascade='all, delete')
 
 
     @hybrid_property
