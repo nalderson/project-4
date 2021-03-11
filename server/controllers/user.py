@@ -1,13 +1,16 @@
 from flask import Blueprint, request, g
 from models.user import User
 from serializers.user import UserSchema
+from serializers.follow_table import FollowingSchema
 from marshmallow.exceptions import ValidationError
 from decorators.secure_route import secure_route
+from models.follow_table import Following
 
 
 #  * These are our user controllers, sign up, login and get single user profile
 
 user_schema = UserSchema()
+following_schema = FollowingSchema()
 
 
 router = Blueprint(__name__, "users")
@@ -55,3 +58,13 @@ def get_a_profile(user_id):
         return {"message": "This user has not been found"}, 404
 
     return user_schema.jsonify(user), 200
+
+@router.route('/profile/<int:user_id>', methods=['POST'])
+@secure_route
+def add_a_follower(user_id):
+    
+    follow = Following(following_current_user_id=g.current_user.id, following_user_id=user_id)
+    follow.save()
+
+    
+    return "Well done, you made a new friend"

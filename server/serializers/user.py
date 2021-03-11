@@ -12,7 +12,7 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
 
     password = fields.String(required=True)
     photos = fields.Nested('PhotoSchema', many=True)
-    following = fields.Nested('FollowingSchema', many=True)
+    following_users = fields.Nested('FollowingSchema', many=True)
     comments = fields.Nested('CommentSchema', many=True)
 
 class SimpleUserSchema(ma.SQLAlchemyAutoSchema):
@@ -20,3 +20,4 @@ class SimpleUserSchema(ma.SQLAlchemyAutoSchema):
         model = User
         load_instance = True
         exclude = ('password_hash', 'email')
+

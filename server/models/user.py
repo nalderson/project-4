@@ -15,6 +15,7 @@ class User(db.Model, BaseModel):
     username = db.Column(db.String(20), nullable=False, unique=True)
     email = db.Column(db.Text, nullable=False, unique=True)
     password_hash = db.Column(db.String(128), nullable=True)
+    profile_picture = db.Column(db.Text, nullable=False)
  
     comments = db.relationship('Comment', backref='user', cascade='all, delete')
     photos = db.relationship('Photo', backref='user', cascade='all, delete')
