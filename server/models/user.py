@@ -19,11 +19,9 @@ class User(db.Model, BaseModel):
     photos = db.relationship('Photo', backref='user', cascade='all, delete')
 
 
-
     @hybrid_property
     def password(self):
         pass
-
 
     @password.setter
     def password(self, password_plaintext):
@@ -48,4 +46,5 @@ class User(db.Model, BaseModel):
 
         token = jwt.encode(payload, secret, 'HS256')
         return token
+
 

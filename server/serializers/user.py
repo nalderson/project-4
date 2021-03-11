@@ -14,6 +14,7 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     photos = fields.Nested('PhotoSchema', many=True)
     following = fields.Nested('FollowingSchema', many=True)
     followers = fields.Nested('FollowerSchema', many=True)
+    comments = fields.Nested('CommentSchema', many=True)
 
 class SimpleUserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
