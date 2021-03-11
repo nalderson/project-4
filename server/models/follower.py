@@ -7,6 +7,8 @@ from models.user import User
 class Follower(db.Model, BaseModel):
 
     __tablename__ = 'follower'
-    content = db.Column(db.Text, nullable=False)
     
-    
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
+    user_following = db.relationship("User", backref="follower", foreign_keys = [user_id])
+    following_user = db.relationship("User", backref="following_user", foreign_keys = [follower_id])
