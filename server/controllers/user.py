@@ -47,3 +47,11 @@ def login():
 def get_user_profile():
     return user_schema.jsonify(g.current_user)
 
+@router.route('/profile/<int:user_id>', methods=['GET'])
+def get_a_profile(user_id):
+    user = User.query.get(user_id)
+
+    if not user:
+        return {"message": "This user has not been found"}, 404
+
+    return user_schema.jsonify(user), 200
