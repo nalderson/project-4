@@ -6,3 +6,4 @@ class FollowerSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Follower
         load_instance = True
+  

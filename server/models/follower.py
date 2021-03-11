@@ -9,5 +9,4 @@ class Follower(db.Model, BaseModel):
     __tablename__ = 'follower'
     content = db.Column(db.Text, nullable=False)
     
-    follower = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
+    
