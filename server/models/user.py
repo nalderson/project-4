@@ -5,8 +5,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 import jwt
 from datetime import *
 from config.environment import secret
-# from models.following import Following
-# from models.follower import Follower
+
 # * This is our user model including methods to set, encode, and verify password
 
 class User(db.Model, BaseModel):
@@ -18,8 +17,7 @@ class User(db.Model, BaseModel):
  
     comments = db.relationship('Comment', backref='user', cascade='all, delete')
     photos = db.relationship('Photo', backref='user', cascade='all, delete')
-    # following = db.relationship('Following', backref='user', cascade='all, delete')
-    # followers = db.relationship('Follower', backref='user', cascade='all, delete')
+
 
 
     @hybrid_property
