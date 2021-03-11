@@ -50,22 +50,21 @@ def login():
 def get_user_profile():
     return user_schema.jsonify(g.current_user)
 
-@router.route('/follow/<int:other_user_id>', methods=['GET'])
-@secure_route
-def add_follower(following_id):
-    following = User.query.get(following_id)
-    follower = g.current_user
-    try:
-      new_follower = follower_schema.load()
-      new_follower.follower = follower
-      new_follower.following = following
-      new_following = following_schema.load()
-      new_following.follower = follower
-      new_following.following = following
-    except ValidationError as e:
-      return {"errors": e.messages, "messages": "Something went wrong adding a follower"}
-    new_follower.save()
-    new_following.save()
+# @router.route('/follow/<int:other_user_id>', methods=['GET'])
+# @secure_route
+# def add_follower(following_id):
+#     following = User.query.get(following_id)
+#     follower = g.current_user
+#     try:
+#       new_follower = follower_schema.load()
+#       new_follower.follower = follower
+#       new_follower.following = following
+#       new_following = following_schema.load()
+#       new_following.follower = follower
+#       new_following.following = following
+#     except ValidationError as e:
+#       return {"errors": e.messages, "messages": "Something went wrong adding a follower"}
+#     new_follower.save()
+#     new_following.save()
 
-    return "New follower added!"
-    
+#     return "New follower added!"
