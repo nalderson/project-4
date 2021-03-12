@@ -18,6 +18,7 @@
     "babel-loader": "^8.0.5",
     "css-loader": "^3.5.3",
     "dotenv-webpack": "^4.0.0",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.3.0",
     "sass": "^1.32.8",
     "sass-loader": "^8.0.2",
@@ -27,8 +28,10 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@toast-ui/react-image-editor": "^3.14.0",
     "axios": "^0.21.1",
     "bulma": "^0.9.2",
+    "downloadjs": "^1.4.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0"
