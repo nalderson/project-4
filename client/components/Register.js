@@ -35,8 +35,8 @@ export default function Register({ history }) {
     event.preventDefault()
     window.cloudinary.createUploadWidget(
       {
-        cloudName: 'Pinstagram',
-        uploadPreset: 'mww9imzw',
+        cloudName: 'dqkixqgcu',
+        uploadPreset: 'nasx6xsf',
         cropping: true
       },
       (err, result) => {
