@@ -7,7 +7,7 @@ export default function Register({ history }) {
     username: '',
     email: '',
     password: '',
-    passwordConfirmation: '',
+    // passwordConfirmation: '',
     profile_picture: 'https://i.pinimg.com/564x/f2/b6/e4/f2b6e41cda9aed63ecbcd32de69b825a.jpg'
   })
 
@@ -15,14 +15,13 @@ export default function Register({ history }) {
     username: '',
     email: '',
     password: '',
-    passwordConfirmation: '',
-    profile_picture: '',
+    // passwordConfirmation: '',
+    profile_picture: ''
   })
 
   const [registrationSuccess, updateRegistrationSuccess] = useState(false)
   const [uploadSuccess, updateUploadSuccess] = useState(false)
 
-  // console.log(regErrors)
 
   function handleChange(event) {
     const { name, value } = event.target
@@ -54,23 +53,26 @@ export default function Register({ history }) {
 
   async function handleSubmit(event) {
     event.preventDefault()
-    if (regData.passwordConfirmation !== regData.password) {
-      updateRegErrors({
-        ...regErrors,
-        passwordConfirmation: 'Password confirmation invalid!'
-      })
-    } else {
-      try {
-        // console.log(data)
-        await axios.post('/api/signup', regData)
-        if (updateRegistrationSuccess(true)) {
-          return history.push('/login')
-        }
-      } catch (err) {
-        console.log('The error is:', err.response.data)
-        updateRegErrors(err.response.data)
-      }
+    // if (regData.passwordConfirmation !== regData.password) {
+    //   updateRegErrors({
+    //     ...regErrors,
+    //     passwordConfirmation: 'Password confirmation invalid!'
+    //   })
+
+    console.log(regData)
+    try {
+      // console.log(data)
+      await axios.post('/api/signup', regData)
+      // if (updateRegistrationSuccess(true)) {
+      //   return history.push('/login')
+      // }
+      console.log(regData)
+      console.log('Just posted')
+    } catch (err) {
+      console.log('The error is:', err)
+      updateRegErrors(err.response.data)
     }
+
   }
 
   return <section className="hero is-danger is-fullheight">
@@ -92,7 +94,7 @@ export default function Register({ history }) {
                     name={'username'}
                   />
                   {regErrors.username && <small className="has-text-danger">{regErrors.username.messages}</small>}
-                  {console.log(regErrors)}
+                  {/* {console.log(regErrors)} */}
                 </div>
               </div>
 

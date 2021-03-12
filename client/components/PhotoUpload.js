@@ -23,12 +23,12 @@ const myTheme = {
   'menu.hoverIcon.path': iconc
 }
 async function UploadToCloudinary(photoData) {
-  const url = 'https://api.cloudinary.com/v1_1/Pinstagram/image/upload'
+  const url = 'https://api.cloudinary.com/v1_1/dqkixqgcu/image/upload'
   const formData = new FormData()
   console.log(photoData)
   const file = photoData
   formData.append('file', file)
-  formData.append('upload_preset', 'mww9imzw')
+  formData.append('upload_preset', 'nasx6xsf')
   const { data } = await axios.post(url, formData)
   console.log(data)
 
