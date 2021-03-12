@@ -8,8 +8,8 @@ from marshmallow.exceptions import ValidationError
 
 @app.errorhandler(ValidationError)
 def validation_error(e):
-    return { "errors": e.messages, "Message": "Something went wrong in validation" }
+    return { "errors": e.messages, "Message": "Something went wrong in validation" }, 404
 
 @app.errorhandler(Exception)
 def generic_error(e):
-    return { "errors": str(e), "Message": "Generic Error"}
+    return { "errors": str(e), "Message": "Generic Error"}, 404
