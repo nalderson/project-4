@@ -8,11 +8,11 @@ export default function Explore({ history }) {
 
   const [profile, updateProfile] = useState({
     photos: [],
-    following_users: [{}]
+    following_current_user: [{}]
   })
   const [buttonNum, updateButtonNum] = useState(1)
   // const token = localStorage.getItem('token')
-  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlhdCI6MTYxNTU2NjgyOSwiZXhwIjoxNjE1NjUzMjI5fQ.TVE067Sd4eGIwu3dF-CsqD80Ms-s341tfx4gdZYojyk'
+  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlhdCI6MTYxNTcyNDU4NCwiZXhwIjoxNjE1ODEwOTg0fQ.k-HdCtmzdaRLCnaWXBl5ZTMxl09jLfCHESUs1qtioas'
 
   useEffect(() => {
     async function getProfileData() {
@@ -62,11 +62,14 @@ export default function Explore({ history }) {
     return <div className="following">
       <h1>This will display following user images in a carousel</h1>
       <Slider {...settings} style={sliderStyle} >
-        {profile.following_users.map((follower, index) => {
-          return <Link to={{ pathname: `/profile/${follower.username}` }} key={index}>
-            <img src={follower.following_current_user.profile_picture} alt={follower.following_current_user.username} />
-            <h4>{follower.following_current_user.username}</h4>
-          </Link>
+        {profile.following_current_user.map((follower, index) => {
+          if ('following_user' in follower) {
+            return <Link to={{ pathname: `/profile/${follower.following_user.username}` }} key={index}>
+              <img src={follower.following_user.profile_picture} alt={follower.following_user.username} />
+              <h4>{follower.following_user.username}</h4>
+            </Link>
+          }
+
         })}
       </Slider>
     </div>

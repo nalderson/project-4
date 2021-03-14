@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react'
 import 'tui-image-editor/dist/tui-image-editor.css'
 import ImageEditor from '@toast-ui/react-image-editor'
 import axios from 'axios'
-import savePhoto from './PhotoSavingModal'
+// import savePhoto from './PhotoSavingModal'
 const icona = require('tui-image-editor/dist/svg/icon-a.svg')
 const iconb = require('tui-image-editor/dist/svg/icon-b.svg')
 const iconc = require('tui-image-editor/dist/svg/icon-c.svg')
 const icond = require('tui-image-editor/dist/svg/icon-d.svg')
-const [saveModal, updateSaveModal] = useState(false)
-const [cloudinaryURL, updateCloudinaryURL] = useState('')
+// const [saveModal, updateSaveModal] = useState(false)
+// const [cloudinaryURL, updateCloudinaryURL] = useState('')
+//! FIX THIS JOE
 const myTheme = {
   'menu.backgroundColor': 'white',
   'common.backgroundColor': '#ffffff',
