@@ -13,6 +13,7 @@ import PhotoUpload from './components/PhotoUpload'
 import MyAccount from './components/MyAccount'
 import UserSearch from './components/UserSearch'
 import FollowerProfile from './components/FollowerProfile'
+import savePhoto from './components/PhotoSavingModal'
 
 const App = () => (
   <BrowserRouter>
@@ -24,6 +25,7 @@ const App = () => (
       <Route exact path="/explore" component={Explore}/>
       <Route exact path="/explore/:photo_id" component={IndividualPhoto}/>
       <Route exact path="/photo-upload" component={PhotoUpload} />
+      <Route exact path="/photo-save" component={savePhoto} />
       <Route exact path="/profile/usersearch" component={UserSearch} />
       <Route exact path="/profile/:username" component={FollowerProfile} />
       <Route exact path="/profile/myprofile/:username" component={MyAccount} />

@@ -46,14 +46,14 @@ const Navbar = ({ history }) => {
     <div className="navbar-menu is-active">
       <div className="navbar-end">
         {!logIn ?
-        <div className="navbar-item">
-        <Link className="button" to="/login">Login</Link>
-        </div> :
-        <div className="navbar-item">
-        <Link className="button" to={`/profile/myprofile/${userName}`}>My Profile</Link>
-        <Link className="button" to="photo-upload">New Photo</Link>
-        <button className="button" onClick={logOut}>Log Out</button>
-        </div>
+          <div className="navbar-item">
+            <Link className="button" to="/login">Login</Link>
+          </div> :
+          <div className="navbar-item">
+            <Link className="button" to={`/profile/myprofile/${userName}`}>My Profile</Link>
+            <Link className="button" to="photo-upload">New Photo</Link>
+            <button className="button" onClick={logOut}>Log Out</button>
+          </div>
         }
       </div>
     </div>
