@@ -8,8 +8,11 @@ from marshmallow.exceptions import ValidationError
 
 @app.errorhandler(ValidationError)
 def validation_error(e):
-    return { "errors": e.messages, "Message": "Something went wrong in validation" }, 404
+    return { "errors": e.messages, "Message": "Something went wrong in validation" }, 400
 
 @app.errorhandler(Exception)
 def generic_error(e):
-    return { "errors": str(e), "Message": "Generic Error"}, 404
+    if (str(e) == 'You must have a valid email address'):
+        return {"email": "You must have a valid email address"}, 405
+    else:
+        return {"username": "This username already exists, please use another one"}, 401

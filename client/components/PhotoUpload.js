@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import 'tui-image-editor/dist/tui-image-editor.css'
 import ImageEditor from '@toast-ui/react-image-editor'
 import axios from 'axios'
+// import savePhoto from './PhotoSavingModal'
 const icona = require('tui-image-editor/dist/svg/icon-a.svg')
 const iconb = require('tui-image-editor/dist/svg/icon-b.svg')
 const iconc = require('tui-image-editor/dist/svg/icon-c.svg')
 const icond = require('tui-image-editor/dist/svg/icon-d.svg')
-const download = require('downloadjs')
 
+//! FIX THIS JOE
 const myTheme = {
   'menu.backgroundColor': 'white',
   'common.backgroundColor': '#ffffff',
@@ -22,26 +23,8 @@ const myTheme = {
   'menu.disabledIcon.path': icona,
   'menu.hoverIcon.path': iconc
 }
-async function UploadToCloudinary(photoData) {
-  const url = 'https://api.cloudinary.com/v1_1/dqkixqgcu/image/upload'
-  const formData = new FormData()
-  console.log(photoData)
-  const file = photoData
-  formData.append('file', file)
-  formData.append('upload_preset', 'nasx6xsf')
-  const { data } = await axios.post(url, formData)
-  console.log(data)
 
 
-  // await fetch(url, {
-  //   method: 'POST', 
-  //   body: formData
-  // }).then((response) => {
-  //   console.log(response.text)
-  // })
-
-
-}
 
 function PhotoUpload() {
   const [imageSrc, setImageSrc] = useState('')
@@ -51,14 +34,43 @@ function PhotoUpload() {
     const data = imageEditorInst.toDataURL()
     if (data) {
       UploadToCloudinary(data)
-      
-      // const mimeType = data.split(';')[0]
-      // const extension = data.split(';')[0].split('/')[1]
-      // download(data, `image.${extension}`, mimeType)
-      // This function above will be given an image.png.
     }
   }
 
+  const [saveModal, updateSaveModal] = useState(false)
+  const [cloudinaryURL, updateCloudinaryURL] = useState('')
+  async function UploadToCloudinary(photoData) {
+    const url = 'https://api.cloudinary.com/v1_1/dqkixqgcu/image/upload'
+    const formData = new FormData()
+
+    const file = photoData
+
+    formData.append('file', file)
+    formData.append('upload_preset', 'nasx6xsf')
+    const config = {
+      headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    }
+    console.log(formData)
+    // const body = {
+    //   file: file,
+    //   upload_preset: 'nasx6xsf'
+    // }
+    // console.log(body)
+    try {
+      const { data } = await axios.post(url, formData, config)
+      updateCloudinaryURL(data)
+      console.log(data)
+      updateSaveModal(true)
+    } catch (err) {
+      console.log(err)
+    }
+    // await fetch(url, {
+    //   method: 'POST', 
+    //   body: body
+    // }).then((response) => {
+    //   console.log(response.text)
+    // })
+  }
 
 
   return (
@@ -78,7 +90,7 @@ function PhotoUpload() {
           menu: ['crop', 'flip', 'rotate', 'draw', 'shape', 'text', 'filter'],
           initMenu: '',
           uiSize: {
-            height: '100vh'
+            height: '94vh'
           },
           menuBarPosition: 'bottom'
         }}
@@ -91,6 +103,7 @@ function PhotoUpload() {
         usageStatistics={true}
         ref={imageEditor}
       />
+      {saveModal && savePhoto(cloudinaryURL)}
     </div>
   )
 }
