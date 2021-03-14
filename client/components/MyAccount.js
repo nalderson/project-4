@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Slider from 'react-slick'
 
 
-export default function Explore({ history }) {
+export default function Explore({ history, match }) {
 
   const [profile, updateProfile] = useState({
     photos: [],
@@ -12,12 +12,14 @@ export default function Explore({ history }) {
   })
   const [buttonNum, updateButtonNum] = useState(1)
   // const token = localStorage.getItem('token')
-  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlhdCI6MTYxNTcyNDU4NCwiZXhwIjoxNjE1ODEwOTg0fQ.k-HdCtmzdaRLCnaWXBl5ZTMxl09jLfCHESUs1qtioas'
+  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImlhdCI6MTYxNTczMzUyOCwiZXhwIjoxNjE1ODE5OTI4fQ.VLCvNne-13czV0r1we7hpGLuLxl6ztjPyfi0MEmkBRM'
+  const username = match.params.username
+
 
   useEffect(() => {
     async function getProfileData() {
       try {
-        const { data } = await axios.get('/api/profile', { headers: { 'Authorization': `Bearer ${token}` } })
+        const { data } = await axios.get(`/api/profile/${username}`, { headers: { 'Authorization': `Bearer ${token}` } })
         updateProfile(data)
       } catch (err) {
         console.log(err)
