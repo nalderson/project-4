@@ -19,6 +19,9 @@ export default function Register({ history }) {
     profile_picture: ''
   })
 
+  const [passwordConfirmation, updatePasswordConfirmation] = useState('')
+  const [passVal, updatePassVal] = useState('')
+
   const [registrationSuccess, updateRegistrationSuccess] = useState(false)
   const [uploadSuccess, updateUploadSuccess] = useState(false)
 
@@ -53,26 +56,23 @@ export default function Register({ history }) {
 
   async function handleSubmit(event) {
     event.preventDefault()
-    // if (regData.passwordConfirmation !== regData.password) {
-    //   updateRegErrors({
-    //     ...regErrors,
-    //     passwordConfirmation: 'Password confirmation invalid!'
-    //   })
+    if (regData.passwordConfirmation !== regData.password) {
+      updatePassVal('Password confirmation invalid!')
 
     console.log(regData)
     try {
       // console.log(data)
       await axios.post('/api/signup', regData)
-      // if (updateRegistrationSuccess(true)) {
-      //   return history.push('/login')
-      // }
+      if (updateRegistrationSuccess(true)) {
+        return history.push('/login')
+      }
       console.log(regData)
       console.log('Just posted')
     } catch (err) {
       console.log('The error is:', err)
       updateRegErrors(err.response.data)
     }
-
+  }
   }
 
   return <section className="hero is-danger is-fullheight">
@@ -94,7 +94,6 @@ export default function Register({ history }) {
                     name={'username'}
                   />
                   {regErrors.username && <small className="has-text-danger">{regErrors.username.messages}</small>}
-                  {/* {console.log(regErrors)} */}
                 </div>
               </div>
 
