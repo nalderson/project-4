@@ -12,7 +12,7 @@ export default function Explore({ history }) {
   })
   const [buttonNum, updateButtonNum] = useState(1)
   // const token = localStorage.getItem('token')
-  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlhdCI6MTYxNTU2NjgyOSwiZXhwIjoxNjE1NjUzMjI5fQ.TVE067Sd4eGIwu3dF-CsqD80Ms-s341tfx4gdZYojyk'
+  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlhdCI6MTYxNTcyNDU0NywiZXhwIjoxNjE1ODEwOTQ3fQ.09WCfj247RFLmQ7mm3houJpj9OxggvZfyTDkllqWPhA'
 
   useEffect(() => {
     async function getProfileData() {
