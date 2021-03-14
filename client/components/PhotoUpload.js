@@ -7,8 +7,7 @@ const icona = require('tui-image-editor/dist/svg/icon-a.svg')
 const iconb = require('tui-image-editor/dist/svg/icon-b.svg')
 const iconc = require('tui-image-editor/dist/svg/icon-c.svg')
 const icond = require('tui-image-editor/dist/svg/icon-d.svg')
-// const [saveModal, updateSaveModal] = useState(false)
-// const [cloudinaryURL, updateCloudinaryURL] = useState('')
+
 //! FIX THIS JOE
 const myTheme = {
   'menu.backgroundColor': 'white',
@@ -24,43 +23,8 @@ const myTheme = {
   'menu.disabledIcon.path': icona,
   'menu.hoverIcon.path': iconc
 }
-async function UploadToCloudinary(photoData) {
-  const url = 'https://api.cloudinary.com/v1_1/dqkixqgcu/image/upload'
-  const formData = new FormData()
-
-  const file = photoData
-
-  formData.append('file', file)
-  formData.append('upload_preset', 'nasx6xsf')
-  const config = {
-    headers: { 'X-Requested-With': 'XMLHttpRequest' }
-  }
-  console.log(formData)
-  // const body = {
-  //   file: file,
-  //   upload_preset: 'nasx6xsf'
-  // }
-  // console.log(body)
-  try {
-    const { data } = await axios.post(url, formData, config)
-    updateCloudinaryURL(data)
-    console.log(data)
-    updateSaveModal(true)
-  } catch (err) {
-    console.log(err)
-  }
-  
 
 
-  // await fetch(url, {
-  //   method: 'POST', 
-  //   body: body
-  // }).then((response) => {
-  //   console.log(response.text)
-  // })
-
-
-}
 
 function PhotoUpload() {
   const [imageSrc, setImageSrc] = useState('')
@@ -72,7 +36,41 @@ function PhotoUpload() {
       UploadToCloudinary(data)
     }
   }
-  
+
+  const [saveModal, updateSaveModal] = useState(false)
+  const [cloudinaryURL, updateCloudinaryURL] = useState('')
+  async function UploadToCloudinary(photoData) {
+    const url = 'https://api.cloudinary.com/v1_1/dqkixqgcu/image/upload'
+    const formData = new FormData()
+
+    const file = photoData
+
+    formData.append('file', file)
+    formData.append('upload_preset', 'nasx6xsf')
+    const config = {
+      headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    }
+    console.log(formData)
+    // const body = {
+    //   file: file,
+    //   upload_preset: 'nasx6xsf'
+    // }
+    // console.log(body)
+    try {
+      const { data } = await axios.post(url, formData, config)
+      updateCloudinaryURL(data)
+      console.log(data)
+      updateSaveModal(true)
+    } catch (err) {
+      console.log(err)
+    }
+    // await fetch(url, {
+    //   method: 'POST', 
+    //   body: body
+    // }).then((response) => {
+    //   console.log(response.text)
+    // })
+  }
 
 
   return (
