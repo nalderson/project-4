@@ -25,17 +25,32 @@ const myTheme = {
 async function UploadToCloudinary(photoData) {
   const url = 'https://api.cloudinary.com/v1_1/dqkixqgcu/image/upload'
   const formData = new FormData()
-  console.log(photoData)
+  // console.log(photoData)
   const file = photoData
+
   formData.append('file', file)
   formData.append('upload_preset', 'nasx6xsf')
-  const { data } = await axios.post(url, formData)
-  console.log(data)
+  const config = {
+    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+  }
+  console.log(formData)
+  // const body = {
+  //   file: file,
+  //   upload_preset: 'nasx6xsf'
+  // }
+  // console.log(body)
+  try {
+    const { data } = await axios.post(url, formData, config)
+    console.log(data)
+  } catch (err) {
+    console.log(err)
+  }
+  
 
 
   // await fetch(url, {
   //   method: 'POST', 
-  //   body: formData
+  //   body: body
   // }).then((response) => {
   //   console.log(response.text)
   // })
@@ -78,7 +93,7 @@ function PhotoUpload() {
           menu: ['crop', 'flip', 'rotate', 'draw', 'shape', 'text', 'filter'],
           initMenu: '',
           uiSize: {
-            height: '100vh'
+            height: '94vh'
           },
           menuBarPosition: 'bottom'
         }}

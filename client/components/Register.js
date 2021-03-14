@@ -7,15 +7,18 @@ export default function Register({ history }) {
     username: '',
     email: '',
     password: '',
-    // passwordConfirmation: '',
     profile_picture: 'https://i.pinimg.com/564x/f2/b6/e4/f2b6e41cda9aed63ecbcd32de69b825a.jpg'
+  })
+
+  const [passwordConfirmationData, updatePasswordConfirmationData] = useState({
+    passwordConfirmation: ''
   })
 
   const [regErrors, updateRegErrors] = useState({
     username: '',
     email: '',
     password: '',
-    // passwordConfirmation: '',
+    passwordConfirmation: '',
     profile_picture: ''
   })
 
@@ -30,12 +33,18 @@ export default function Register({ history }) {
     updateRegErrors({ ...regErrors, [name]: '' })
   }
 
+  function handlePasswordConfirmationChange(event) {
+    const { name, value } = event.target
+    updatePasswordConfirmationData({ ...passwordConfirmationData, [name]: value })
+    updateRegErrors({ ...regErrors, [name]: '' })
+  }
+
   function handleUpload(event) {
     event.preventDefault()
     window.cloudinary.createUploadWidget(
       {
-        cloudName: 'Pinstagram',
-        uploadPreset: 'mww9imzw',
+        cloudName: 'dqkixqgcu',
+        uploadPreset: 'nasx6xsf',
         cropping: true
       },
       (err, result) => {
@@ -53,23 +62,17 @@ export default function Register({ history }) {
 
   async function handleSubmit(event) {
     event.preventDefault()
-    // if (regData.passwordConfirmation !== regData.password) {
-    //   updateRegErrors({
-    //     ...regErrors,
-    //     passwordConfirmation: 'Password confirmation invalid!'
-    //   })
-
+    if (passwordConfirmationData.passwordConfirmation !== regData.password) {
+      updateRegErrors({ ...regErrors, ['passwordConfirmation']: 'Password did not match' })
+      return
+    }
     console.log(regData)
     try {
-      // console.log(data)
       await axios.post('/api/signup', regData)
-      // if (updateRegistrationSuccess(true)) {
-      //   return history.push('/login')
-      // }
-      console.log(regData)
-      console.log('Just posted')
+      updateRegistrationSuccess(true)
+      history.push('/login')
+    
     } catch (err) {
-      console.log('The error is:', err)
       updateRegErrors(err.response.data)
     }
 
@@ -93,8 +96,7 @@ export default function Register({ history }) {
                     onChange={handleChange}
                     name={'username'}
                   />
-                  {regErrors.username && <small className="has-text-danger">{regErrors.username.messages}</small>}
-                  {/* {console.log(regErrors)} */}
+                  {regErrors.username && <small className="has-text-primary">{regErrors.username}</small>}
                 </div>
               </div>
 
@@ -107,7 +109,7 @@ export default function Register({ history }) {
                     onChange={handleChange}
                     name={'email'}
                   />
-                  {regErrors.email && <small className="has-text-primary">{regErrors.email.messages}</small>}
+                  {regErrors.email && <small className="has-text-primary">{regErrors.email}</small>}
                 </div>
               </div>
 
@@ -128,8 +130,8 @@ export default function Register({ history }) {
                 <div className='control'>
                   <input className='input'
                     type='password'
-                    value={regData.passwordConfirmation}
-                    onChange={handleChange}
+                    value={passwordConfirmationData.passwordConfirmation}
+                    onChange={handlePasswordConfirmationChange}
                     name={'passwordConfirmation'}
                   />
                   {regErrors.passwordConfirmation && <small className="has-text-primary">{regErrors.passwordConfirmation}</small>}
