@@ -8,7 +8,7 @@ export default function Explore({ history }) {
 
   const [profile, updateProfile] = useState({
     photos: [],
-    following_current_users: []
+    following_users: [{}]
   })
   const [buttonNum, updateButtonNum] = useState(1)
   // const token = localStorage.getItem('token')
@@ -28,7 +28,8 @@ export default function Explore({ history }) {
 
   console.log(profile)
   console.log(profile.photos)
-  console.log()
+  console.log(profile.following_users)
+
 
   var settings = {
     arrows: true,
@@ -61,11 +62,10 @@ export default function Explore({ history }) {
     return <div className="following">
       <h1>This will display following user images in a carousel</h1>
       <Slider {...settings} style={sliderStyle} >
-        {profile.following_users.following_current_users.map((follower, index) => {
-          return <Link to={{ pathname: '/profile/:username' }}
-            key={index}>
-            <img src={follower.profile_picture} alt={follower.username} />
-            <p>{follower.username}</p>
+        {profile.following_users.map((follower, index) => {
+          return <Link to={{ pathname: `/profile/${follower.username}` }} key={index}>
+            <img src={follower.following_current_user.profile_picture} alt={follower.following_current_user.username} />
+            <h4>{follower.following_current_user.username}</h4>
           </Link>
         })}
       </Slider>
