@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import 'tui-image-editor/dist/tui-image-editor.css'
 import ImageEditor from '@toast-ui/react-image-editor'
 import axios from 'axios'
+import savePhoto from './PhotoSavingModal'
 const icona = require('tui-image-editor/dist/svg/icon-a.svg')
 const iconb = require('tui-image-editor/dist/svg/icon-b.svg')
 const iconc = require('tui-image-editor/dist/svg/icon-c.svg')
 const icond = require('tui-image-editor/dist/svg/icon-d.svg')
-const download = require('downloadjs')
-
+const [saveModal, updateSaveModal] = useState(false)
+const [cloudinaryURL, updateCloudinaryURL] = useState('')
 const myTheme = {
   'menu.backgroundColor': 'white',
   'common.backgroundColor': '#ffffff',
@@ -25,7 +26,7 @@ const myTheme = {
 async function UploadToCloudinary(photoData) {
   const url = 'https://api.cloudinary.com/v1_1/dqkixqgcu/image/upload'
   const formData = new FormData()
-  // console.log(photoData)
+
   const file = photoData
 
   formData.append('file', file)
@@ -41,7 +42,9 @@ async function UploadToCloudinary(photoData) {
   // console.log(body)
   try {
     const { data } = await axios.post(url, formData, config)
+    updateCloudinaryURL(data)
     console.log(data)
+    updateSaveModal(true)
   } catch (err) {
     console.log(err)
   }
@@ -66,14 +69,9 @@ function PhotoUpload() {
     const data = imageEditorInst.toDataURL()
     if (data) {
       UploadToCloudinary(data)
-      
-      // const mimeType = data.split(';')[0]
-      // const extension = data.split(';')[0].split('/')[1]
-      // download(data, `image.${extension}`, mimeType)
-      // This function above will be given an image.png.
     }
   }
-
+  
 
 
   return (
@@ -106,6 +104,7 @@ function PhotoUpload() {
         usageStatistics={true}
         ref={imageEditor}
       />
+      {saveModal && savePhoto(cloudinaryURL)}
     </div>
   )
 }
