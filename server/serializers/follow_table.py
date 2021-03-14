@@ -6,5 +6,5 @@ class FollowingSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Following
         load_instance = True
-    # following_user = fields.Nested('SimpleUserSchema')
+    following_user = fields.Nested('SimpleUserSchema')
     following_current_user = fields.Nested('SimpleUserSchema')
