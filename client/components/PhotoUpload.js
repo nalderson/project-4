@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import 'tui-image-editor/dist/tui-image-editor.css'
 import ImageEditor from '@toast-ui/react-image-editor'
 import axios from 'axios'
-import savePhoto from './PhotoSavingModal'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
+
 const icona = require('tui-image-editor/dist/svg/icon-a.svg')
 const iconb = require('tui-image-editor/dist/svg/icon-b.svg')
 const iconc = require('tui-image-editor/dist/svg/icon-c.svg')
@@ -31,32 +31,33 @@ function PhotoUpload() {
   const [captionError, updateCaptionError] = useState('')
   const token = localStorage.getItem('token')
   const history = useHistory()
+  const [welcomeMat, updateWelcomeMat] = useState(false)
   const [photoData, updatePhotoData] = useState(
     {
       url: cloudinaryURL,
       caption: ''
     })
-  
+
   const saveImageToDisk = () => {
     const imageEditorInst = imageEditor.current.imageEditorInst
     const data = imageEditorInst.toDataURL()
+    if (!token) {
+      return
+    }
     if (data) {
       UploadToCloudinary(data)
     }
   }
-  useEffect(() => {
-    updatePhotoData({ ...photoData, url: cloudinaryURL })
-  }, [cloudinaryURL])
 
 
 
   const [saveModal, updateSaveModal] = useState(false)
   const [cloudinaryURL, updateCloudinaryURL] = useState('')
-  async function UploadToCloudinary(photoData) {
+  async function UploadToCloudinary(data) {
     const url = 'https://api.cloudinary.com/v1_1/dqkixqgcu/image/upload'
     const formData = new FormData()
 
-    const file = photoData
+    const file = data
 
     formData.append('file', file)
     formData.append('upload_preset', 'nasx6xsf')
@@ -67,8 +68,9 @@ function PhotoUpload() {
     try {
       const { data } = await axios.post(url, formData, config)
       updateCloudinaryURL(data.secure_url)
-      console.log(data.secure_url)
-      // updatePhotoData({ ...photoData, url: data.secure_url })
+      const photo = data.secure_url
+      const photo2 = String(photo)
+      updatePhotoData({ ...photoData, url: photo2 })
       updateSaveModal(true)
     } catch (err) {
       console.log(err)
@@ -105,16 +107,17 @@ function PhotoUpload() {
       }
     }
   }
-  function changeModal() {
-    updateSaveModal(true)
+
+  function closeWelcomeMat() {
+    updateWelcomeMat(true)
   }
 
   return (
     <div>
       <div>
-        <div className="has-text-centered">
+        {token && <div className="has-text-centered">
           <button className='button is-rounded' onClick={saveImageToDisk}>Save and Publish</button>
-        </div>
+        </div>}
       </div>
       <ImageEditor
         includeUI={{
@@ -140,32 +143,41 @@ function PhotoUpload() {
         ref={imageEditor}
       />
       {saveModal && <div className='modal is-active'>
-        <div className='modal-background'>
-          <div className='modal-content'>
-            <div>
-              <img src={cloudinaryURL} />
-              <form className='field' onSubmit={handleSave}>
-                <div className='field'>
-                  <div className='control'>
-                    <input className='input'
-                      type='text'
-                      value={photoData.caption}
-                      onChange={handleChange}
-                      name={'caption'}
-                      placeholder='Please add a photo caption'
-                    />
-                    {captionError && <small className='has-text-primary'>{captionError}</small>}
-                  </div>
+        <div className='modal-background'></div>
+        <div className='modal-content'>
+          <div>
+            <img src={cloudinaryURL} />
+            <form className='field' onSubmit={handleSave}>
+              <div className='field'>
+                <div className='control'>
+                  <input className='input'
+                    type='text'
+                    value={photoData.caption}
+                    onChange={handleChange}
+                    name={'caption'}
+                    placeholder='Please add a photo caption'
+                  />
+                  {captionError && <small className='has-text-primary'>{captionError}</small>}
                 </div>
-                <div className="has-text-centered">
-                  <button className="button is-hovered is-rounded" onClick={handleSave}>Save Photo</button>
-                </div>
-              </form>
-            </div>
+              </div>
+              <div className="has-text-centered">
+                <button className="button is-hovered is-rounded" onClick={handleSave}>Save Photo</button>
+              </div>
+            </form>
           </div>
         </div>
+
       </div>}
-      <button className="button" onClick={changeModal}>Modal?</button>
+      {!token && !welcomeMat && <div className='modal is-active has-text-centered has-text-white'>
+        <div className='modal-background'></div>
+        <div className='modal-content is-clipped has-text-centered'>
+          <p className='title has-text-white'>Hello!</p><br></br>
+          <p className='subtitle has-text-white'>We've noticed you're not logged in, so feel free to upload and edit a photo, but be aware you can't save it</p><br></br>
+          <p className='subtitle has-text-white'>However, if you'd like to register or login, please click below!</p>
+          <Link to='/login' className='button is-rounded'>Log In</Link>
+        </div>
+        <button className='modal-close is-large' aria-label="close" onClick={closeWelcomeMat}></button>
+      </div>}
     </div>
   )
 }

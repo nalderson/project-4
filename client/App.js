@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './styles/style.scss'
 import 'bulma'
+import Media from 'react-media'
 
 import Navbar from './components/Navbar'
 import Home from './components/Home'
@@ -10,10 +11,11 @@ import Register from './components/Register'
 import Explore from './components/Explore'
 import IndividualPhoto from './components/IndividualPhoto'
 import PhotoUpload from './components/PhotoUpload'
+import MobilePhotoUpload from './components/MobilePhotoUpload.js'
 import MyAccount from './components/MyAccount'
 import UserSearch from './components/UserSearch'
 import FollowerProfile from './components/FollowerProfile'
-import savePhoto from './components/PhotoSavingModal'
+
 
 const App = () => (
   <BrowserRouter>
@@ -25,7 +27,7 @@ const App = () => (
       <Route exact path="/explore" component={Explore}/>
       <Route exact path="/explore/:photo_id" component={IndividualPhoto}/>
       <Route exact path="/photo-upload" component={PhotoUpload} />
-      <Route exact path="/photo-save" component={savePhoto} />
+      <Route exact path="/mobile-photo-upload" component={MobilePhotoUpload} />
       <Route exact path="/profile/usersearch" component={UserSearch} />
       <Route exact path="/profile/:username" component={FollowerProfile} />
       <Route exact path="/profile/myprofile/:username" component={MyAccount} />
