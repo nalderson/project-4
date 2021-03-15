@@ -7,6 +7,7 @@ const Navbar = ({ history }) => {
 
 
   const [logIn, updateLogin] = useState(false)
+  const [mobNav, updateMobNav] = useState(false)
   const [userId, setUserId] = useState('')
   const [userName, setUserName] = useState('')
 
@@ -40,24 +41,38 @@ const Navbar = ({ history }) => {
   }
 
   return <nav className="navbar" role="navigation" aria-label="main navigation">
-    <div className="navbar-brand" id="navbarImage">
-      <Link to="/"><img src={logo} width="100" /></Link>
-    </div>
-    <div className="navbar-menu is-active">
-      <div className="navbar-end">
-        {!logIn ?
-          <div className="navbar-item">
-            <Link className="button" to="/login">Login</Link>
-          </div> :
-          <div className="navbar-item">
-            <Link className="button" to={`/profile/myprofile/${userName}`}>My Profile</Link>
-            <Link className="button" to="photo-upload">New Photo</Link>
-            <button className="button" onClick={logOut}>Log Out</button>
-          </div>
-        }
+  <div className="navbar-brand" id="navbarImage">
+  <Link to="/"><img src={logo} width="100" /></Link>
+    <a onClick={() => updateMobNav(!mobNav)} role="button" className={`navbar-burger ${mobNav ? 'is-active' : ''}`} >
+      <span aria-hidden="true" />
+      <span aria-hidden="true" />
+      <span aria-hidden="true" />
+    </a>
+  </div>
+  <div id="navbarBasicExample" className={`navbar-menu ${mobNav ? 'is-active' : ''}`}>
+    <div className="navbar-start">
+
+
+      <div className="navbar-item has-dropdown is-hoverable">
+
+        <div className="navbar-dropdown">
+          <hr className="navbar-divider" />
+        </div>
       </div>
     </div>
-  </nav>
+    <div className="navbar-end">
+      <div className="navbar-item">
+        <div className="menu-item">
+          <Link to="/explore" className="button is-light is-rounded">Explore</Link>
+          <Link className="button is-light is-rounded" to="photo-upload">New Photo</Link>
+          {logIn && <Link to={`/profile/myprofile/${userName}`} className="button is-dark is-rounded">My Profile</Link>}
+          {!logIn && <Link to="/login" className="button is-dark is-rounded">Login</Link>}
+          {logIn && <button className="button is-light is-rounded" onClick={logOut}>Logout</button>}
+        </div>
+      </div>
+    </div>
+  </div>
+</nav >
 
 
 }
