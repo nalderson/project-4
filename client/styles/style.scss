@@ -14,3 +14,28 @@
 // .navbarLogo {
 //   height: 80px;
 // }
+
+#account-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account-buttons {
+  margin: 10px 5px 0px 5px;
+}
+
+#account-profile-pic {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+
+#followers-button {
+  padding-left: 35.5px;
+  padding-right: 35.5px;
+}
+
+#account-title {
+  margin-top: 20px;
+}

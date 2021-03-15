@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-
+import { getLoggedInUserId } from '../lib/auth'
 
 export default function IndividualPhoto({ match }) {
   const id = match.params.id
