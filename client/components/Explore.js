@@ -24,7 +24,7 @@ export default function Explore() {
       <div className="columns is-multiline is-mobile is-centered">
         {photos.map((photo, index) => {
           return <div key={index} className="column is-one-third-desktop is-half-tablet is-half-mobile is-centered">
-            <Link to={`/explore/${photo.photo_url}`}>
+            <Link to={`/explore/${photo.id}`}>
               <div className="card">
                 <div className="card-image">
                   <figure className="image is-4by3">
