@@ -59,7 +59,7 @@ const Navbar = ({ history }) => {
 
   return <nav className="navbar" role="navigation" aria-label="main navigation">
     <div className="navbar-brand" id="navbarImage">
-      <Link to="/"><img src={logo} width="75" /></Link>
+      <Link to="/"><img id="logo"src={logo} width="65" /></Link>
       <a onClick={() => updateMobNav(!mobNav)} role="button" className={`navbar-burger ${mobNav ? 'is-active' : ''}`} >
         <span aria-hidden="true" />
         <span aria-hidden="true" />
@@ -80,16 +80,12 @@ const Navbar = ({ history }) => {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="menu-item">
-            <Link to="/explore" className="button is-light is-rounded">Explore</Link>
-<<<<<<< HEAD
-            <Link className="button is-light is-rounded" to="photo-upload">New Photo</Link>
-=======
-            <Link className="button is-light is-rounded" to={isMobile ? '/mobile-photo-upload' : '/photo-upload'}>New Photo</Link>
-            <Link to="/users" className="button is-light is-rounded">Users</Link>
->>>>>>> development
-            {logIn && <Link to={`/profile/myprofile/${userName}`} className="button is-dark is-rounded">My Profile</Link>}
-            {!logIn && <Link to="/login" className="button is-dark is-rounded">Login</Link>}
-            {logIn && <button className="button is-light is-rounded" onClick={logOut}>Logout</button>}
+            <Link to="/explore" className="button is-light is-rounded" id="explore">Explore</Link>
+            <Link id="photo-upload" className="button is-light is-rounded" to={isMobile ? '/mobile-photo-upload' : '/photo-upload'}>New Photo</Link>
+            <Link to="/users" id="users" className="button is-light is-rounded">Users</Link>
+            {logIn && <Link to={`/profile/myprofile/${userName}`} id="my-profile" className="button is-rounded">My Profile</Link>}
+            {!logIn && <Link to="/login" className="button is-light is-rounded" id="login">Login</Link>}
+            {logIn && <button className="button is-light is-rounded" id="logout" onClick={logOut}>Logout</button>}
           </div>
         </div>
       </div>
