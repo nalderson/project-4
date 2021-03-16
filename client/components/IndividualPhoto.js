@@ -92,7 +92,7 @@ export default function IndividualPhoto({ match }) {
           {isCreator(commenting.user._id) && <div>
             <button onClick={() => removeComment(commenting._id)}>
               Delete
-              </button>
+            </button>
           </div>}
 
           {isCreator(commenting.user._id) && <div>
