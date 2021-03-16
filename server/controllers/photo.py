@@ -96,7 +96,7 @@ def create_comment(photo_id):
 
     comment.save()
 
-    return comment_schema.jsonify(comment)
+    return photo_schema.jsonify(photo)
 
 
 
