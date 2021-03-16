@@ -27,7 +27,7 @@ export default function DisplayFollowing(props) {
 
   return <>
     <div className="buttons has-addons is-center">
-      <button id="followers-button"className="account-buttons button is-dark is-rounded" onClick={() => showModal2(!modal2)} disabled={!profile.following_users}>Followers</button>
+      <button id="followers-button" className="account-buttons button is-dark is-rounded" onClick={() => showModal2(!modal2)} disabled={!profile.following_users}>Followers</button>
       <button id="following-button" className="account-buttons button is-dark is-rounded" onClick={() => showModal(!modal)} disabled={!profile.following_current_user}>Following</button>
     </div>
     <div role="button" className={`modal ${modal ? 'is-active' : ''}`}>
@@ -53,11 +53,9 @@ export default function DisplayFollowing(props) {
                       <div className="media-content">
                         <div className="content">
                           <h1>{console.log(follower.following_user.username)}</h1>
-                          <p>
+                          <p><br />
                             <strong>{follower.following_user.username}</strong>
-                            <br></br>
-                            Please show my name please 
-                            </p>
+                          </p>
                         </div>
                       </div>
                     </Link>
@@ -70,7 +68,7 @@ export default function DisplayFollowing(props) {
       </div>
     </div>
 
-{/* -------------------------------MODAL2---------------------------------- */}
+    {/* -------------------------------MODAL2---------------------------------- */}
 
     <div role="button" className={`modal ${modal2 ? 'is-active' : ''}`}>
       <div className="modal is-active">
@@ -82,21 +80,21 @@ export default function DisplayFollowing(props) {
           </header>
           <section className="modal-card-body">
             <div className="container is-centered">
-               {(profile.following_users) && profile.following_users.map((follower, index) => {
-                  return <article key={index} className="media">
-                    <Link to={{ pathname: `/profile/${follower.following_current_user.id}` }}>
-                      <figure className="media-left">
-                        <p className="image is-64x64">
-                          <img src={follower.following_current_user.profile_picture} alt={follower.following_current_user.username} />
-                        </p>
-                      </figure>
-                      <div className="media-content">
-                        <div className="content is-flex">
-                          <p><strong>{follower.following_current_user.username}</strong></p>
-                        </div>
+              {(profile.following_users) && profile.following_users.map((follower, index) => {
+                return <article key={index} className="media">
+                  <Link to={{ pathname: `/profile/${follower.following_current_user.id}` }}>
+                    <figure className="media-left">
+                      <p className="image is-64x64">
+                        <img src={follower.following_current_user.profile_picture} alt={follower.following_current_user.username} />
+                      </p>
+                    </figure>
+                    <div className="media-content">
+                      <div className="content is-flex">
+                        <p><strong>{follower.following_current_user.username}</strong></p>
                       </div>
-                    </Link>
-                  </article>
+                    </div>
+                  </Link>
+                </article>
               })}
             </div>
           </section>
