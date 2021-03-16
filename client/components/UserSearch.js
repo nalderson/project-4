@@ -21,7 +21,7 @@ export default function UserSearch() {
     event.preventDefault()
     const value = event.target.value
     setFilterTerm(value)
-    
+
   }
 
   function filterUsers() {
@@ -31,23 +31,25 @@ export default function UserSearch() {
   }
 
   return <section className='section is-centered'>
-    <div className="column is-half-desktop">
-      <input
-        type="text"
-        placeholder="Search by name..."
-        className="input is-info is-rounded is-9"
-        onChange={(event) => handleChange(event)}
-        value={filterTerm}
-      />
+    <div className="has-text-centered" id="input-wrap">
+      <div className="input-search">
+        <input
+          type="text"
+          placeholder="Search by name..."
+          className="input is-info is-rounded is-9 is-center is-light" id="input-search"
+          onChange={(event) => handleChange(event)}
+          value={filterTerm}
+        />
+      </div>
     </div>
     <div className="container is-centered">
       <div className="columns is-multiline is-mobile is-centered">
         {filterUsers().map((user, index) => {
           return <div key={index} className="column is-one-third-desktop is-half-tablet is-half-mobile is-centered">
             <Link to={`/profile/${user.id}`}>
-              <div className="card">
-                <div className="card-image">
-                  <figure className="image">
+              <div className="card is-4x3">
+                <div className="card-image ">
+                  <figure className="image is-4by3">
                     <img src={user.profile_picture} alt={user.username} />
                   </figure>
                 </div>

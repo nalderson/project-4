@@ -118,36 +118,40 @@ export default function IndividualPhoto({ match }) {
     
   }
 
-  return <section className="container is-vcentered">
+  return <section className="container is-vcentered ">
     <div>
       <button className="button is-light is-rounded" id="back-button" onClick={goBack}>Back</button>
-      <div className="container is-vcentered block box">
+      <div className="container is-vcentered block box is-three-quarters-desktop has-text-centered">
         <button className="button is-rounded" onClick={goBack}>Back</button>
         {loggedIn && isCreator(getLoggedInUserId()) && <button className="button is-rounded" onClick={deletePhoto}>Delete Photo</button>}
         <img src={thisImage.url} alt={thisImage.caption} />
         <h4>{thisImage.caption}</h4>
-        {loggedIn && <button onClick={likeButton}>❤️ {thisImage.rating}</button>}
+        {loggedIn && <div className="has-text-right"><button onClick={likeButton}>❤️ {thisImage.rating}</button></div>}
       </div>
-      {thisImage.comments && thisImage.comments.map(commenting => {
-        return <div key={commenting.id} className="media">
-          <figure className="media-left">
-            <p>{commenting.user.username}</p>
-            <img className="image is-64x64" src={commenting.user.profile_picture} />
-          </figure>
-          <div className="media-content">
-            <div className="content">
-              <p>{commenting.content}</p>
-              {isCreator(commenting.user.id) && <div>
-                <button className="button is-rounded" onClick={() => removeComment(commenting.id)}>
-                  Delete
-                </button>
-              </div>}
-              {isCreator(commenting.user.id) && <div>
-                <button className="button is-rounded" onClick={openEditingModal}>
-                  Update
-                </button>
-              </div>}
-              {isCreator(commenting.user.id) && editingComment && <div>
+      <h2 className="subtitle">Comments</h2>
+      <div className="is-half-desktop " id="comments">
+        {thisImage.comments && thisImage.comments.map(commenting => {
+          return <article key={commenting.id} className="media is-half-desktop">
+            <div className="media-content is-half-desktop">
+              <p>{commenting.user.username}</p>
+              <img className="image is-64x64" src={commenting.user.profile_picture} />
+              <div className="content">
+                <figure>
+                  <p>{commenting.content}</p>
+                </figure>
+              </div>
+            </div>
+
+            {isCreator(commenting.user.id) && <div className="media-right">
+              <button className="delete" onClick={() => removeComment(commenting.id)}>
+                Delete
+              </button>
+              <button className="delete" id="edit" onClick={openEditingModal}>
+                Update
+              </button>
+            </div>}
+            {
+              isCreator(commenting.user.id) && editingComment && <div>
                 <textarea
                   className="textarea"
                   placeholder="Please write a new comment"
@@ -156,25 +160,27 @@ export default function IndividualPhoto({ match }) {
                   name={'content'}>
                 </textarea>
                 <button className="button is-rounded" onClick={() => handleUpdateComment(commenting.id)}>Save</button>
-              </div>}
-            </div>
+              </div>
+            }
+          </article>
+        })}
+      </div>
+      {
+        loggedIn && <div>
+          <textarea
+            className="textarea"
+            placeholder="Please write your comment"
+            onChange={handleChange}
+            value={commentData.content}
+            name={'content'}>
+          </textarea>
+          {commentError && <small className='has-text-primary'>{commentError}</small>}
+          <div>
+            <button onClick={postComment} className="button is-info">Submit</button>
           </div>
         </div>
-      })}
-      {loggedIn && <div>
-        <textarea
-          className="textarea"
-          placeholder="Please write your comment"
-          onChange={handleChange}
-          value={commentData.content}
-          name={'content'}>
-        </textarea>
-        {commentError && <small className='has-text-primary'>{commentError}</small>}
-        <div>
-          <button onClick={postComment} className="button is-info">Submit</button>
-        </div>
-      </div>}
-    </div>
-  </section>
+      }
+    </div >
+  </section >
 
 }
