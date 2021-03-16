@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Component } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { getLoggedInUserId, isCreator } from '../lib/auth'
 
 export default function IndividualPhoto({ match }) {
@@ -65,8 +65,7 @@ export default function IndividualPhoto({ match }) {
     }
   }
 
-  // Function to Update a Comment
-
+  // Function Update Comment
   async function handleUpdateComment(commentId) {
     try {
       const { data } = await axios.put(`/api/photos/${id}/comments/${commentId}`, newCommentData, {
@@ -78,10 +77,10 @@ export default function IndividualPhoto({ match }) {
       console.log(err)
     }
   }
+
   // Handle change
   function handleChange(event) {
     const { name, value } = event.target
-
     updateCommentData({ ...commentData, [name]: value })
   }
   function handleEditingChange(event) {
@@ -93,44 +92,61 @@ export default function IndividualPhoto({ match }) {
     updateNewCommentData(commentData)
   }
 
+  async function likeButton() {
+    let numLikes = thisImage.rating
+    numLikes++
+    const newRating = { rating: numLikes }
+    const { data } = await axios.put(`/api/photos/${id}`, newRating, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    updateThisImage(data)
+  }
+  const history = useHistory()
+
+  async function goBack() {
+    history.go(-1)
+  }
+
   return <section className="container is-vcentered">
     <div>
       <div className="container is-vcentered block box">
+        <button className="button is-rounded" onClick={goBack}>Back</button>
         <img src={thisImage.url} alt={thisImage.caption} />
         <h4>{thisImage.caption}</h4>
+        {loggedIn && <button onClick={likeButton}>❤️ {thisImage.rating}</button>}
       </div>
       {thisImage.comments && thisImage.comments.map(commenting => {
-        console.log(commenting)
-        return <div key={commenting.id} className="container is-vcentered block box">
+        return <div key={commenting.id} className="media">
           <p>{commenting.user.username}</p>
           <img src={commenting.user.profile_picture} />
-          <p>{commenting.content}</p>
-
-          {isCreator(commenting.user.id) && <div>
-            <button className="button is-rounded" onClick={() => removeComment(commenting.id)}>
-              Delete
-            </button>
-          </div>}
-          {isCreator(commenting.user.id) && <div>
-            <button className="button is-rounded" onClick={openEditingModal}>
-              Update
-            </button>
-          </div>}
-          {isCreator(commenting.user.id) && editingComment && <div>
-            <textarea
-              className="textarea"
-              placeholder="Please write a new comment"
-              onChange={handleEditingChange}
-              value={newCommentData.content}
-              name={'content'}>
-            </textarea>
-            <div>
-              <button className="button is-rounded" onClick={() => handleUpdateComment(commenting.id)}>Save</button>
+          <div className="media-content">
+            <div className="field">
+              <p>{commenting.content}</p>
+              {isCreator(commenting.user.id) && <div>
+                <button className="button is-rounded" onClick={() => removeComment(commenting.id)}>
+                  Delete
+                </button>
+              </div>}
+              {isCreator(commenting.user.id) && <div>
+                <button className="button is-rounded" onClick={openEditingModal}>
+                  Update
+                </button>
+              </div>}
+              {isCreator(commenting.user.id) && editingComment && <div>
+                <textarea
+                  className="textarea"
+                  placeholder="Please write a new comment"
+                  onChange={handleEditingChange}
+                  value={newCommentData.content}
+                  name={'content'}>
+                </textarea>
+                <button className="button is-rounded" onClick={() => handleUpdateComment(commenting.id)}>Save</button>
+              </div>}
             </div>
-          </div>}
-
-
+          </div>
         </div>
+
+
       })}
       {loggedIn && <div>
         <textarea
@@ -147,4 +163,5 @@ export default function IndividualPhoto({ match }) {
       </div>}
     </div>
   </section>
+
 }

@@ -95,7 +95,7 @@ export default function Explore({ match }) {
           <div className="columns is-multiline is-mobile is-centered is-vcentered">
             {profile.photos.map((photo, index) => {
               return <div key={index} className="column is-one-third-desktop is-half-tablet is-half-mobile is-centered">
-                <Link to={{ pathname: '/explore/:photo_id' }}>
+                <Link to={{ pathname: `/explore/${photo.id}` }}>
                   <div className="card">
                     <div className="card-image">
                       <figure className="image">
