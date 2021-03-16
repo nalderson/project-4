@@ -90,7 +90,9 @@ export default function DisplayFollowing(props) {
                     </figure>
                     <div className="media-content">
                       <div className="content is-flex">
-                        <p><strong>{follower.following_current_user.username}</strong></p>
+                        <p><br />
+                          <strong>{follower.following_current_user.username}</strong>
+                          </p>
                       </div>
                     </div>
                   </Link>
