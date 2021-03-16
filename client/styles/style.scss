@@ -6,7 +6,6 @@
   background-size: cover;
 }
 
-
 .tui-image-editor-header-logo{
   display: none;
 }
@@ -75,4 +74,21 @@ margin-right: 2px;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+}
+
+#photos {
+  line-height: 0;
+  column-count: 3;
+  column-gap: 10px;
+}
+
+#photos img {
+  width: 100% !important;
+  height: auto !important;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+#picsterTitle {
+  color: rgb(225,136,121);
 }

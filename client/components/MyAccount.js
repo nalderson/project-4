@@ -91,23 +91,16 @@ export default function Explore({ match }) {
     </div>
     <div>
       <section className="section is-centered">
-        <div className="container is-centered">
-          <div className="columns is-multiline is-mobile is-centered is-vcentered">
-            {profile.photos.map((photo, index) => {
-              return <div key={index} className="column is-one-third-desktop is-half-tablet is-half-mobile is-centered">
-                <Link to={{ pathname: `/explore/${photo.id}` }}>
-                  <div className="card">
-                    <div className="card-image">
-                      <figure className="image">
-                        <img src={photo.url} alt={photo.caption} />
-                      </figure>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            })}
-          </div>
+        <div className="container is-centered" id="photos">
+          {profile.photos.map((photo, index) => {
+            return <div key={index} >
+              <Link to={`/explore/${photo.id}`}>
+                <img src={photo.url} alt={photo.caption} />
+              </Link>
+            </div>
+          })}
         </div>
+
       </section>
     </div>
     {modalState && <div className='modal is-active has-text-centered has-text-white'>
