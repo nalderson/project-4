@@ -41,38 +41,38 @@ const Navbar = ({ history }) => {
   }
 
   return <nav className="navbar" role="navigation" aria-label="main navigation">
-  <div className="navbar-brand" id="navbarImage">
-  <Link to="/"><img src={logo} width="100" /></Link>
-    <a onClick={() => updateMobNav(!mobNav)} role="button" className={`navbar-burger ${mobNav ? 'is-active' : ''}`} >
-      <span aria-hidden="true" />
-      <span aria-hidden="true" />
-      <span aria-hidden="true" />
-    </a>
-  </div>
-  <div id="navbarBasicExample" className={`navbar-menu ${mobNav ? 'is-active' : ''}`}>
-    <div className="navbar-start">
+    <div className="navbar-brand" id="navbarImage">
+      <Link to="/"><img src={logo} width="75" /></Link>
+      <a onClick={() => updateMobNav(!mobNav)} role="button" className={`navbar-burger ${mobNav ? 'is-active' : ''}`} >
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+      </a>
+    </div>
+    <div id="navbarBasicExample" className={`navbar-menu ${mobNav ? 'is-active' : ''}`}>
+      <div className="navbar-start">
 
 
-      <div className="navbar-item has-dropdown is-hoverable">
+        <div className="navbar-item has-dropdown is-hoverable">
 
-        <div className="navbar-dropdown">
-          <hr className="navbar-divider" />
+          <div className="navbar-dropdown">
+            <hr className="navbar-divider" />
+          </div>
+        </div>
+      </div>
+      <div className="navbar-end">
+        <div className="navbar-item">
+          <div className="menu-item">
+            <Link to="/explore" className="button is-light is-rounded">Explore</Link>
+            <Link className="button is-light is-rounded" to="photo-upload">New Photo</Link>
+            {logIn && <Link to={`/profile/myprofile/${userName}`} className="button is-dark is-rounded">My Profile</Link>}
+            {!logIn && <Link to="/login" className="button is-dark is-rounded">Login</Link>}
+            {logIn && <button className="button is-light is-rounded" onClick={logOut}>Logout</button>}
+          </div>
         </div>
       </div>
     </div>
-    <div className="navbar-end">
-      <div className="navbar-item">
-        <div className="menu-item">
-          <Link to="/explore" className="button is-light is-rounded">Explore</Link>
-          <Link className="button is-light is-rounded" to="photo-upload">New Photo</Link>
-          {logIn && <Link to={`/profile/myprofile/${userName}`} className="button is-dark is-rounded">My Profile</Link>}
-          {!logIn && <Link to="/login" className="button is-dark is-rounded">Login</Link>}
-          {logIn && <button className="button is-light is-rounded" onClick={logOut}>Logout</button>}
-        </div>
-      </div>
-    </div>
-  </div>
-</nav >
+  </nav >
 
 
 }
