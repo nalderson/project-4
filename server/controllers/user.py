@@ -68,3 +68,25 @@ def add_a_follower(user_id):
 
     
     return "Well done, you made a new friend"
+
+@router.route('/users', methods=['GET'])
+def get_all_users():
+    users = User.query.all()
+    return user_schema.jsonify(users, many=True), 200
+
+@router.route('/profile/<int:user_id>', methods=['PUT'])
+@secure_route
+def update_user(user_id):
+    unchanged_user = User.query.get(user_id)
+    user_dictionary = request.json
+    try:
+        user = user_schema.load(
+            user_dictionary,
+            instance=unchanged_user,
+            partial=True,
+        )
+    except ValidationError as e:
+        return {"errors": e.messages, "messages": "Something went wrong"}
+    user.save()
+
+    return user_schema.jsonify(user), 201

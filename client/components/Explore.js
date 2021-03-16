@@ -21,13 +21,13 @@ export default function Explore() {
 
   return <section className="section is-centered">
     <div className="container is-centered">
-      <div className="columns is-multiline is-mobile is-centered">
+      <div className="columns is-multiline is-mobile is-centered is-vcentered">
         {photos.map((photo, index) => {
-          return <div key={index} className="column is-one-third-desktop is-half-tablet is-half-mobile is-centered">
-            <Link to={`/explore/${photo.photo_url}`}>
+          return <div key={index} className="column is-one-third-desktop is-half-tablet is-half-mobile is-centered" >
+            <Link to={`/explore/${photo.id}`}>
               <div className="card">
                 <div className="card-image">
-                  <figure className="image is-4by3">
+                  <figure className="image">
                     <img src={photo.url} alt={photo.caption} />
                   </figure>
                 </div>
@@ -38,4 +38,6 @@ export default function Explore() {
       </div>
     </div>
   </section>
+
+
 }

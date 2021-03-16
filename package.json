@@ -31,11 +31,15 @@
     "@toast-ui/react-image-editor": "^3.14.0",
     "axios": "^0.21.1",
     "bulma": "^0.9.2",
+    "bulma-switch": "^2.0.0",
     "cloudinary-react": "^1.7.0",
     "downloadjs": "^1.4.7",
+    "pretty-checkbox": "^3.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-media": "^1.10.0",
     "react-router-dom": "^5.2.0",
+    "react-select": "^4.2.1",
     "react-slick": "^0.28.1"
   }
 }

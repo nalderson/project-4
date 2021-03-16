@@ -10,7 +10,24 @@ const Navbar = ({ history }) => {
   const [mobNav, updateMobNav] = useState(false)
   const [userId, setUserId] = useState('')
   const [userName, setUserName] = useState('')
-
+  const [isMobile, updateIsMobile] = useState(false)
+  
+  useEffect(() => {
+    function determineMobile(x) {
+      if (x.matches) { // If media query matches
+        updateIsMobile(true)
+      } else {
+        updateIsMobile(false)
+      }
+    }
+    
+    var x = window.matchMedia('(max-width: 500px)')
+    determineMobile(x) // Call listener function at run time
+    x.addListener(determineMobile) // Attach listener function on state changes
+  }, [])
+  
+  
+  
   useEffect(() => {
     const handleLogin = () => {
       const token = localStorage.getItem('token')
@@ -64,7 +81,12 @@ const Navbar = ({ history }) => {
         <div className="navbar-item">
           <div className="menu-item">
             <Link to="/explore" className="button is-light is-rounded">Explore</Link>
+<<<<<<< HEAD
             <Link className="button is-light is-rounded" to="photo-upload">New Photo</Link>
+=======
+            <Link className="button is-light is-rounded" to={isMobile ? '/mobile-photo-upload' : '/photo-upload'}>New Photo</Link>
+            <Link to="/users" className="button is-light is-rounded">Users</Link>
+>>>>>>> development
             {logIn && <Link to={`/profile/myprofile/${userName}`} className="button is-dark is-rounded">My Profile</Link>}
             {!logIn && <Link to="/login" className="button is-dark is-rounded">Login</Link>}
             {logIn && <button className="button is-light is-rounded" onClick={logOut}>Logout</button>}

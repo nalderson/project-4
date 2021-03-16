@@ -1,20 +1,28 @@
 import React, { useState, useEffect, Component } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import { getLoggedInUserId } from '../lib/auth'
+import { useHistory } from 'react-router-dom'
+import { getLoggedInUserId, isCreator } from '../lib/auth'
 
 export default function IndividualPhoto({ match }) {
-  const id = match.params.id
-  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlhdCI6MTYxNTczMTYzNSwiZXhwIjoxNjE1ODE4MDM1fQ.X8uUhhwIivewOSXg-RcWs5ZJDLni6v8arqnmn757CuE'
-  const [images, updateimages] = useState({
+  const id = match.params.photo_id
+  const token = localStorage.getItem('token')
+  const [thisImage, updateThisImage] = useState({
     image: []
   })
+  const loggedIn = getLoggedInUserId()
+  const [newCommentData, updateNewCommentData] = useState({
+  })
+  const [commentData, updateCommentData] = useState({
+    content: ''
+  })
+  const [commentError, updateCommentError] = useState('')
+  const [editingComment, updateEditingComment] = useState(false)
 
   useEffect(() => {
     async function getImageData() {
       try {
         const { data } = await axios.get(`/api/photos/${id}`, { headers: { 'Authorization': `Bearer ${token}` } })
-        updateimages(data)
+        updateThisImage(data)
       } catch (err) {
         console.log(err)
       }
@@ -23,65 +31,137 @@ export default function IndividualPhoto({ match }) {
   }, [])
 
 
-  // Create Comment async function
-  async function createComment(commentId) {
-    await axios.post(`api/photos/${id}/comments/${commentId}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    setTitle('')
-    setComment('')
-    updateComments(data)
+  // Post Comment
+  async function postComment() {
+    if (!commentData.content) {
+      updateCommentError('Please add some text')
+      return
+    }
+    try {
+      console.log(commentData.content)
+      console.log(commentData)
+      const { data } = await axios.post(`/api/photos/${id}/comments`, commentData, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      updateCommentData({ ...commentData, content: '' })
+      updateThisImage(data)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-  // Remove Comment async function
+  // Remove Comment
   async function removeComment(commentId) {
     if (!isCreator) {
       return null
     }
-    await axios.delete(`api/photos/${id}/comments/${commentId}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(resp => {
-        updateComment(resp.data)
+    try {
+      const { data } = await axios.delete(`/api/photos/${id}/comments/${commentId}`, {
+        headers: { Authorization: `Bearer ${token}` }
       })
-  }
-
-  // Update Comment async 
-  async function removeComment(commentId) {
-    if (!isCreator) {
-      return null
+      updateThisImage(data)
+    } catch (err) {
+      console.log(err)
     }
-    await axios.delete(`api/photos/${id}/comments/${commentId}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(resp => {
-        updateComment(resp.data)
-      })
   }
 
+  // Function Update Comment
+  async function handleUpdateComment(commentId) {
+    try {
+      const { data } = await axios.put(`/api/photos/${id}/comments/${commentId}`, newCommentData, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      updateThisImage(data)
+      updateEditingComment(false)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
-  console.log(images)
+  // Handle change
+  function handleChange(event) {
+    const { name, value } = event.target
+    updateCommentData({ ...commentData, [name]: value })
+  }
+  function handleEditingChange(event) {
+    const { name, value } = event.target
+    updateNewCommentData({ ...newCommentData, [name]: value })
+  }
+  function openEditingModal() {
+    updateEditingComment(!editingComment)
+    updateNewCommentData(commentData)
+  }
 
-  return <section>
+  async function likeButton() {
+    let numLikes = thisImage.rating
+    numLikes++
+    const newRating = { rating: numLikes }
+    const { data } = await axios.put(`/api/photos/${id}`, newRating, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    updateThisImage(data)
+  }
+  const history = useHistory()
+
+  async function goBack() {
+    history.go(-1)
+  }
+
+  return <section className="container is-vcentered">
     <div>
-      {images.map((image, index) => {
-        return <div key={index}>
-          <img src={image.url} alt={image.caption} />
-          <h4>{image.caption}</h4>
-          <p>{image.comments.content}</p>
-          <div>
-            <textarea
-              className="textarea"
-              placeholder="Comment Below..."
-              onChange={event => setComment(event.target.value)}
-              value={comment}
-            >
-              {comment}
-            </textarea>
-
+      <div className="container is-vcentered block box">
+        <button className="button is-rounded" onClick={goBack}>Back</button>
+        <img src={thisImage.url} alt={thisImage.caption} />
+        <h4>{thisImage.caption}</h4>
+        {loggedIn && <button onClick={likeButton}>❤️ {thisImage.rating}</button>}
+      </div>
+      {thisImage.comments && thisImage.comments.map(commenting => {
+        return <div key={commenting.id} className="media">
+          <p>{commenting.user.username}</p>
+          <img src={commenting.user.profile_picture} />
+          <div className="media-content">
+            <div className="field">
+              <p>{commenting.content}</p>
+              {isCreator(commenting.user.id) && <div>
+                <button className="button is-rounded" onClick={() => removeComment(commenting.id)}>
+                  Delete
+                </button>
+              </div>}
+              {isCreator(commenting.user.id) && <div>
+                <button className="button is-rounded" onClick={openEditingModal}>
+                  Update
+                </button>
+              </div>}
+              {isCreator(commenting.user.id) && editingComment && <div>
+                <textarea
+                  className="textarea"
+                  placeholder="Please write a new comment"
+                  onChange={handleEditingChange}
+                  value={newCommentData.content}
+                  name={'content'}>
+                </textarea>
+                <button className="button is-rounded" onClick={() => handleUpdateComment(commenting.id)}>Save</button>
+              </div>}
+            </div>
           </div>
         </div>
+
+
       })}
+      {loggedIn && <div>
+        <textarea
+          className="textarea"
+          placeholder="Please write your comment"
+          onChange={handleChange}
+          value={commentData.content}
+          name={'content'}>
+        </textarea>
+        {commentError && <small className='has-text-primary'>{commentError}</small>}
+        <div>
+          <button onClick={postComment} className="button is-info">Submit</button>
+        </div>
+      </div>}
     </div>
   </section>
+
 }
