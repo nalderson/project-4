@@ -27,7 +27,7 @@ export default function Explore() {
             <Link to={`/explore/${photo.id}`}>
               <div className="card">
                 <div className="card-image">
-                  <figure className="image is-4by3">
+                  <figure className="image is-3">
                     <img src={photo.url} alt={photo.caption} />
                   </figure>
                 </div>

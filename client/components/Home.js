@@ -15,7 +15,7 @@ export default function Home() {
     <div className="hero-body">
       <div className="container has-text-centered">
         <p className="title">Welcome to Picster!</p>
-        <Link to="/explore" className="button">
+        <Link to="/explore" className="button is-rounded">
           Explore?
         </Link>
 
