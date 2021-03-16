@@ -6,19 +6,23 @@ import { getLoggedInUserId, isCreator } from '../lib/auth'
 export default function IndividualPhoto({ match }) {
   const id = match.params.photo_id
   const token = localStorage.getItem('token')
-  const [images, updateimages] = useState({
+  const [thisImage, updateThisImage] = useState({
     image: []
   })
   const loggedIn = getLoggedInUserId()
-  const [editNumber, updateEditNumber] = useState(0)
-  const [commentIdentifier, updateCommentIdentifier] = useState('')
-  const [comment, setComment] = useState('')
+  const [newCommentData, updateNewCommentData] = useState({
+  })
+  const [commentData, updateCommentData] = useState({
+    content: ''
+  })
+  const [commentError, updateCommentError] = useState('')
+  const [editingComment, updateEditingComment] = useState(false)
 
   useEffect(() => {
     async function getImageData() {
       try {
         const { data } = await axios.get(`/api/photos/${id}`, { headers: { 'Authorization': `Bearer ${token}` } })
-        updateimages(data)
+        updateThisImage(data)
       } catch (err) {
         console.log(err)
       }
@@ -26,15 +30,24 @@ export default function IndividualPhoto({ match }) {
     getImageData()
   }, [])
 
-  console.log(images)
 
   // Post Comment
-  async function postComment(commentId) {
-    const { data } = await axios.post(`api/photos/${id}/comments/${commentId}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    setComment('')
-    updateImages(data)
+  async function postComment() {
+    if (!commentData.content) {
+      updateCommentError('Please add some text')
+      return
+    }
+    try {
+      console.log(commentData.content)
+      console.log(commentData)
+      const { data } = await axios.post(`/api/photos/${id}/comments`, commentData, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      updateCommentData({ ...commentData, content: '' })
+      updateThisImage(data)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   // Remove Comment
@@ -42,80 +55,96 @@ export default function IndividualPhoto({ match }) {
     if (!isCreator) {
       return null
     }
-    await axios.delete(`api/photos/${id}/comments/${commentId}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(resp => {
-        updateImages(resp.data)
+    try {
+      const { data } = await axios.delete(`/api/photos/${id}/comments/${commentId}`, {
+        headers: { Authorization: `Bearer ${token}` }
       })
+      updateThisImage(data)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-  // Update Comment
-  async function handleEditCommentOne(commentId) {
-    if (!isCreator) {
-      return null
-    }
-    await axios.get(`/api/photos/${id}/comments/${commentId}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).then(resp => {
-      setComment(resp.data.comment)
-      updateEditNumber(1)
-      updateCommentIdentifier(commentId)
-    })
-  }
-  async function handleEditCommentTwo() {
-    if (!isCreator) {
-      return null
-    }
-    await axios.put(`/api/photos/${id}/comments/${commentIdentifier}`, { comment }, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(resp => {
-        updateImages(resp.data)
-        updateEditNumber(0)
-        updateCommentIdentifier('')
+  // Function to Update a Comment
+
+  async function handleUpdateComment(commentId) {
+    try {
+      const { data } = await axios.put(`/api/photos/${id}/comments/${commentId}`, newCommentData, {
+        headers: { Authorization: `Bearer ${token}` }
       })
+      updateThisImage(data)
+      updateEditingComment(false)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  // Handle change
+  function handleChange(event) {
+    const { name, value } = event.target
+
+    updateCommentData({ ...commentData, [name]: value })
+  }
+  function handleEditingChange(event) {
+    const { name, value } = event.target
+    updateNewCommentData({ ...newCommentData, [name]: value })
+  }
+  function openEditingModal() {
+    updateEditingComment(!editingComment)
+    updateNewCommentData(commentData)
   }
 
   return <section className="container is-vcentered">
     <div>
       <div className="container is-vcentered block box">
-        <img src={images.url} alt={images.caption} />
-        <h4>{images.caption}</h4>
+        <img src={thisImage.url} alt={thisImage.caption} />
+        <h4>{thisImage.caption}</h4>
       </div>
-      {images.comments && images.comments.map(commenting => {
+      {thisImage.comments && thisImage.comments.map(commenting => {
+        console.log(commenting)
         return <div key={commenting.id} className="container is-vcentered block box">
           <p>{commenting.user.username}</p>
-          <img src={commenting.user.profile_picture}/>
-          <p>{commenting.comment}</p>
+          <img src={commenting.user.profile_picture} />
+          <p>{commenting.content}</p>
 
-          {isCreator(commenting.user._id) && <div>
-            <button onClick={() => removeComment(commenting._id)}>
+          {isCreator(commenting.user.id) && <div>
+            <button className="button is-rounded" onClick={() => removeComment(commenting.id)}>
               Delete
             </button>
           </div>}
-
-          {isCreator(commenting.user._id) && <div>
-            <button onClick={() => handleEditCommentOne(commenting._id)}>
+          {isCreator(commenting.user.id) && <div>
+            <button className="button is-rounded" onClick={openEditingModal}>
               Update
             </button>
           </div>}
-
-          {loggedIn && <div>
+          {isCreator(commenting.user.id) && editingComment && <div>
             <textarea
               className="textarea"
-              placeholder="Share your experience..."
-              onChange={event => setComment(event.target.value)}
-              value={comment}>
-              {comment}
+              placeholder="Please write a new comment"
+              onChange={handleEditingChange}
+              value={newCommentData.content}
+              name={'content'}>
             </textarea>
             <div>
-              {editNumber === 0 && <button onClick={postComment} className="button is-info">Submit</button>}
-              {editNumber === 1 && <button onClick={handleEditCommentTwo} className="button is-info">Update Comment</button>}
+              <button className="button is-rounded" onClick={() => handleUpdateComment(commenting.id)}>Save</button>
             </div>
           </div>}
+
+
         </div>
       })}
+      {loggedIn && <div>
+        <textarea
+          className="textarea"
+          placeholder="Please write your comment"
+          onChange={handleChange}
+          value={commentData.content}
+          name={'content'}>
+        </textarea>
+        {commentError && <small className='has-text-primary'>{commentError}</small>}
+        <div>
+          <button onClick={postComment} className="button is-info">Submit</button>
+        </div>
+      </div>}
     </div>
   </section>
 }

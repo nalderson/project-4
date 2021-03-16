@@ -29,7 +29,7 @@ const App = () => (
       <Route exact path="/photo-upload" component={PhotoUpload} />
       <Route exact path="/mobile-photo-upload" component={MobilePhotoUpload} />
       <Route exact path="/profile/usersearch" component={UserSearch} />
-      <Route exact path="/profile/:username" component={FollowerProfile} />
+      <Route exact path="/profile/:user_id" component={FollowerProfile} />
       <Route exact path="/profile/myprofile/:username" component={MyAccount} />
       <Route exact path="/users" component={UserSearch} />
     </Switch>
