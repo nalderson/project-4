@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default function UserSearch() {
   const [users, updateUsers] = useState([])
+  const [filterTerm, setFilterTerm] = useState('')
 
   useEffect(() => {
     async function getUsers() {
@@ -16,11 +17,32 @@ export default function UserSearch() {
     }
     getUsers()
   }, [])
+  async function handleChange(event) {
+    event.preventDefault()
+    const value = event.target.value
+    setFilterTerm(value)
+    
+  }
+
+  function filterUsers() {
+    return users.filter((user) => {
+      return user.username.toLowerCase().includes(filterTerm.toLowerCase())
+    })
+  }
 
   return <section className='section is-centered'>
+    <div className="column">
+      <input
+        type="text"
+        placeholder="Search by name..."
+        className="input is-info is-rounded is-9"
+        onChange={(event) => handleChange(event)}
+        value={filterTerm}
+      />
+    </div>
     <div className="container is-centered">
       <div className="columns is-multiline is-mobile is-centered">
-        {users.map((user, index) => {
+        {filterUsers().map((user, index) => {
           return <div key={index} className="column is-one-third-desktop is-half-tablet is-half-mobile is-centered">
             <Link to={`/profile/${user.id}`}>
               <div className="card">
@@ -39,6 +61,4 @@ export default function UserSearch() {
       </div>
     </div>
   </section>
-
-
 }
