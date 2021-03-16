@@ -55,7 +55,8 @@ export default function DisplayFollowing(props) {
                           <h1>{console.log(follower.following_user.username)}</h1>
                           <p>
                             <strong>{follower.following_user.username}</strong>
-                            <br>Please show the name that'd be great thanks x</br>
+                            <br></br>
+                            Please show my name please 
                             </p>
                         </div>
                       </div>
