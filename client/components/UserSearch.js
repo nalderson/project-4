@@ -22,7 +22,7 @@ export default function UserSearch() {
       <div className="columns is-multiline is-mobile is-centered">
         {users.map((user, index) => {
           return <div key={index} className="column is-one-third-desktop is-half-tablet is-half-mobile is-centered">
-            <Link to={`/explore/${user.id}`}>
+            <Link to={`/profile/${user.id}`}>
               <div className="card">
                 <div className="card-image">
                   <figure className="image">

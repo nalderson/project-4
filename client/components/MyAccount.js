@@ -12,7 +12,6 @@ export default function Explore({ match }) {
 
   const token = localStorage.getItem('token')
 
-  const username = match.params.username
   const [modalState, updateModalState] = useState(false)
   const [regData, updateRegData] = useState({
   })
@@ -90,16 +89,16 @@ export default function Explore({ match }) {
         <DisplayFollowing />
       </div>
     </div>
-    <div className="block box">
+    <div>
       <section className="section is-centered">
         <div className="container is-centered">
-          <div className="columns is-multiline is-mobile is-centered">
+          <div className="columns is-multiline is-mobile is-centered is-vcentered">
             {profile.photos.map((photo, index) => {
               return <div key={index} className="column is-one-third-desktop is-half-tablet is-half-mobile is-centered">
                 <Link to={{ pathname: '/explore/:photo_id' }}>
                   <div className="card">
                     <div className="card-image">
-                      <figure className="image is-4by3">
+                      <figure className="image">
                         <img src={photo.url} alt={photo.caption} />
                       </figure>
                     </div>
@@ -118,7 +117,7 @@ export default function Explore({ match }) {
         <div className='field'>
           <label className='labels'>Change Profile Picture</label>
           <div className='control'>
-            <button className="button is-rounded" onClick={handleUpload}>Upload a new profile picture</button>
+            <button className="button is-light is-rounded" onClick={handleUpload}>Upload a new profile picture</button>
             {uploadSuccess && <div><small className="has-text-primary">Upload Complete</small></div>}
           </div>
         </div>

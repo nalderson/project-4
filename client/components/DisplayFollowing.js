@@ -44,7 +44,7 @@ export default function DisplayFollowing(props) {
                 console.log(profile.following_current_user)
                 if (follower.following_user) {
                   return <article key={index} className="media">
-                    <Link to={{ pathname: `/profile/${follower.following_user.username}` }}>
+                    <Link to={{ pathname: `/profile/${follower.following_user.id}` }}>
                       <figure className="media-left">
                         <p className="image is-64x64">
                           <img src={follower.following_user.profile_picture} alt={follower.following_user.username} />
@@ -82,7 +82,7 @@ export default function DisplayFollowing(props) {
                 console.log(profile.following_current_user)
                 if (follower.following_user) {
                   return <article key={index} className="media">
-                    <Link to={{ pathname: `/profile/${follower.following_user.username}` }}>
+                    <Link to={{ pathname: `/profile/${follower.following_user.id}` }}>
                       <figure className="media-left">
                         <p className="image is-64x64">
                           <img src={follower.following_user.profile_picture} alt={follower.following_user.username} />
@@ -90,7 +90,6 @@ export default function DisplayFollowing(props) {
                       </figure>
                       <div className="media-content">
                         <div className="content is-flex">
-                          <h1>{console.log(follower.following_user.username)}</h1>
                           <p><strong>{follower.following_user.username}</strong></p>
                         </div>
                       </div>
