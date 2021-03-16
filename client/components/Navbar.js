@@ -81,7 +81,8 @@ const Navbar = ({ history }) => {
         <div className="navbar-item">
           <div className="menu-item">
             <Link to="/explore" className="button is-light is-rounded">Explore</Link>
-            <Link className="button is-light is-rounded" to={isMobile ? "/mobile-photo-upload" : "/photo-upload"}>New Photo</Link>
+            <Link className="button is-light is-rounded" to={isMobile ? '/mobile-photo-upload' : '/photo-upload'}>New Photo</Link>
+            <Link to="/users" className="button is-light is-rounded">Users</Link>
             {logIn && <Link to={`/profile/myprofile/${userName}`} className="button is-dark is-rounded">My Profile</Link>}
             {!logIn && <Link to="/login" className="button is-dark is-rounded">Login</Link>}
             {logIn && <button className="button is-light is-rounded" onClick={logOut}>Logout</button>}

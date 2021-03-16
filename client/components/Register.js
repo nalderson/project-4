@@ -140,7 +140,7 @@ export default function Register({ history }) {
               <div className='field'>
                 <label className='labels'>Profile Picture (optional)</label>
                 <div className='control'>
-                  <button className="button" onClick={handleUpload}>Upload a profile picture</button>
+                  <button className="button is-rounded" onClick={handleUpload}>Upload a profile picture</button>
                   {uploadSuccess && <div><small className="has-text-primary">Upload Complete</small></div>}
                 </div>
               </div>

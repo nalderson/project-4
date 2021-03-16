@@ -31,6 +31,7 @@ const App = () => (
       <Route exact path="/profile/usersearch" component={UserSearch} />
       <Route exact path="/profile/:username" component={FollowerProfile} />
       <Route exact path="/profile/myprofile/:username" component={MyAccount} />
+      <Route exact path="/users" component={UserSearch} />
     </Switch>
   </BrowserRouter>
 )
