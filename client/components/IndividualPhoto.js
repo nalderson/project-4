@@ -120,6 +120,7 @@ export default function IndividualPhoto({ match }) {
 
   return <section className="container is-vcentered">
     <div>
+      <button className="button is-light is-rounded" id="back-button" onClick={goBack}>Back</button>
       <div className="container is-vcentered block box">
         <button className="button is-rounded" onClick={goBack}>Back</button>
         {loggedIn && isCreator(getLoggedInUserId()) && <button className="button is-rounded" onClick={deletePhoto}>Delete Photo</button>}
@@ -129,10 +130,12 @@ export default function IndividualPhoto({ match }) {
       </div>
       {thisImage.comments && thisImage.comments.map(commenting => {
         return <div key={commenting.id} className="media">
-          <p>{commenting.user.username}</p>
-          <img src={commenting.user.profile_picture} />
+          <figure className="media-left">
+            <p>{commenting.user.username}</p>
+            <img className="image is-64x64" src={commenting.user.profile_picture} />
+          </figure>
           <div className="media-content">
-            <div className="field">
+            <div className="content">
               <p>{commenting.content}</p>
               {isCreator(commenting.user.id) && <div>
                 <button className="button is-rounded" onClick={() => removeComment(commenting.id)}>
@@ -157,8 +160,6 @@ export default function IndividualPhoto({ match }) {
             </div>
           </div>
         </div>
-
-
       })}
       {loggedIn && <div>
         <textarea

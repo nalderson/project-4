@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import HomeHero from '../images/HomeHero.jpg'
+// import HomeHero from '../images/HomeHero.jpg'
 
 export default function Home() {
   // return <section>
@@ -16,7 +16,7 @@ export default function Home() {
       <div className="container has-text-centered">
         <p className="title">Welcome to Picster!</p>
         <Link to="/explore" className="button is-rounded">
-          Explore?
+          Explore
         </Link>
 
       </div>

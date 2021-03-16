@@ -78,8 +78,8 @@ export default function Explore({ match }) {
   }
 
   return <div className="container is-vcentered">
-    <div className="has-text-right">
-      <button className="button is-rounded" onClick={openModal}>Update Profile</button>
+    <div className="has-text-left">
+      <button className="button is-rounded" id="update-profile" onClick={openModal}>Update Profile</button>
     </div>
     <div className="container is-vcentered block box" id="account-header">
       <img id="account-profile-pic" src={profile.profile_picture} />

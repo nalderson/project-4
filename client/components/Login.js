@@ -31,7 +31,7 @@ export default function Login({ history }) {
 
   return <section className="hero is-danger is-fullheight">
     <div className="hero-body" id="herobackground">
-      <div className="container">
+      <div className="container" id="loginbackground">
         <main className='column'>
           <div className='column is-flex is-flex-direction-column is-align-items-center'>
             <h1 className='titles'>Login</h1>
@@ -63,7 +63,7 @@ export default function Login({ history }) {
               </div>
             </form>
             <div className='block box'>
-              <h5>Don't have an account? <Link to='/register'>Sign up!</Link></h5>
+              <h5>Don't have an account? <Link to='/register' style={{color: 'rgb(82,84,116)'}}>Sign up!</Link></h5>
             </div>
           </div>
         </main>
