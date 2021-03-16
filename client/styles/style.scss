@@ -51,7 +51,7 @@ margin-right: 2px;
 #my-profile {
   background-color: rgb(225,136,121);
   border-color: rgb(225,136,121);
-  color: rgb(82,84,116);
+  color: white;
   margin-right: 2px;
 }
 
@@ -75,4 +75,27 @@ margin-right: 2px;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+}
+
+#hero-button {
+  color: rgb(82,84,116);
+}
+
+#input-wrap {
+  display: flex;
+  justify-content: center !important;
+}
+
+.input-search {
+  width: 50%;
+  margin-bottom: 25px;
+}
+
+#edit {
+background-image: url(../images/border-color.svg) !important;
+background-color: rgba(0,0,0,0) !important;
+}
+
+#comments {
+  max-width: 50vw;
 }
