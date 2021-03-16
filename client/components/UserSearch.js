@@ -31,7 +31,7 @@ export default function UserSearch() {
   }
 
   return <section className='section is-centered'>
-    <div className="column">
+    <div className="column is-half-desktop">
       <input
         type="text"
         placeholder="Search by name..."

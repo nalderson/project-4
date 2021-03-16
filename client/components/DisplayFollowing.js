@@ -27,8 +27,8 @@ export default function DisplayFollowing(props) {
 
   return <>
     <div className="buttons has-addons is-center">
-      <button id="followers-button" className="account-buttons button is-dark is-rounded" onClick={() => showModal2(!modal2)} disabled={!profile.following_users}>Followers</button>
-      <button id="following-button" className="account-buttons button is-dark is-rounded" onClick={() => showModal(!modal)} disabled={!profile.following_current_user}>Following</button>
+      <button id="followers-button" className="account-buttons button is-rounded" onClick={() => showModal2(!modal2)} disabled={!profile.following_users}>Followers</button>
+      <button id="following-button" className="account-buttons button is-rounded" onClick={() => showModal(!modal)} disabled={!profile.following_current_user}>Following</button>
     </div>
     <div role="button" className={`modal ${modal ? 'is-active' : ''}`}>
       <div className="modal is-active">
@@ -90,7 +90,9 @@ export default function DisplayFollowing(props) {
                     </figure>
                     <div className="media-content">
                       <div className="content is-flex">
-                        <p><strong>{follower.following_current_user.username}</strong></p>
+                        <p><br />
+                          <strong>{follower.following_current_user.username}</strong>
+                          </p>
                       </div>
                     </div>
                   </Link>

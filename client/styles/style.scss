@@ -1,5 +1,5 @@
 .header-image {
-  background-image: url(/../images/HomeHero.jpg);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/5e9d994b2f1c2d4970c8acdb/1588449203708-31FQHIDPJ7BJH7DS37LZ/ke17ZwdGBToddI8pDm48kF0OLVcBpfeLArU44aYlu9h7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0vIHRucUU7a1Vci15HXS8HJfNvaWVx1ITdXEZlVZUBwpPgzugLHXTeT7NtT_SILjGA/DSC_0886.jpg?format=2500w');
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -34,8 +34,45 @@
 #followers-button, #following-button {
   padding-left: 35.5px;
   padding-right: 35.5px;
+  background-color: rgb(225,136,121);
+  border-color: rgb(225,136,121);
+  color: rgb(82,84,116);
 }
 
 #account-title {
   margin-top: 20px;
+}
+
+#explore, #photo-upload, #users, #login, #logout {
+color: rgb(82,84,116);
+margin-right: 2px;
+}
+
+#my-profile {
+  background-color: rgb(225,136,121);
+  border-color: rgb(225,136,121);
+  color: rgb(82,84,116);
+  margin-right: 2px;
+}
+
+#logo {
+  border-radius: 12px;
+  margin: 10px;
+}
+
+#back-button {
+  margin-bottom: 10px;
+  color: rgb(82,84,116);
+}
+
+#update-profile {
+  margin-bottom: 10px;
+}
+#herobackground {
+  // background-color: rgb(225,136,121);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/5e9d994b2f1c2d4970c8acdb/1588449247500-LUZXK6QHJDY8YBVO7451/ke17ZwdGBToddI8pDm48kLR2rgEg1jPu1GtjV4K1vZ97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0scl71iiVnMuLeEyTFSXT3qwhEKW1IfUKL5GUNLdDa9MjuPXcXiDenG_NSvE-2lGCg/DSC_1048.jpg?format=1000w');
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
