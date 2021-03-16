@@ -106,11 +106,24 @@ export default function IndividualPhoto({ match }) {
   async function goBack() {
     history.go(-1)
   }
+  async function deletePhoto() {
+    try {
+      await axios.delete(`/api/photos/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      } )
+      history.go(-1)
+    } catch (err) {
+      console.log(err)
+    }
+    
+  }
 
   return <section className="container is-vcentered ">
     <div>
       <button className="button is-light is-rounded" id="back-button" onClick={goBack}>Back</button>
       <div className="container is-vcentered block box is-three-quarters-desktop has-text-centered">
+        <button className="button is-rounded" onClick={goBack}>Back</button>
+        {loggedIn && isCreator(getLoggedInUserId()) && <button className="button is-rounded" onClick={deletePhoto}>Delete Photo</button>}
         <img src={thisImage.url} alt={thisImage.caption} />
         <h4>{thisImage.caption}</h4>
         {loggedIn && <div className="has-text-right"><button onClick={likeButton}>❤️ {thisImage.rating}</button></div>}

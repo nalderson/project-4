@@ -54,6 +54,7 @@ const Navbar = ({ history }) => {
 
   function logOut() {
     localStorage.removeItem('token')
+    history.push('/')
     location.reload()
   }
 

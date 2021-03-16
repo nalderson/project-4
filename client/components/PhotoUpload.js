@@ -51,7 +51,7 @@ function PhotoUpload() {
 
 
 
-  const [saveModal, updateSaveModal] = useState(false)
+  
   const [cloudinaryURL, updateCloudinaryURL] = useState('')
   async function UploadToCloudinary(data) {
     const url = 'https://api.cloudinary.com/v1_1/dqkixqgcu/image/upload'
@@ -71,42 +71,19 @@ function PhotoUpload() {
       const photo = data.secure_url
       const photo2 = String(photo)
       updatePhotoData({ ...photoData, url: photo2 })
-      updateSaveModal(true)
+      history.push({
+        pathname: '/photo-save',
+        state: { url: photo2 }
+      })
     } catch (err) {
       console.log(err)
     }
   }
 
 
-  function handleChange(event) {
-    const { name, value } = event.target
-    console.log(event.target)
-    console.log(name)
-    console.log(value)
-    console.log(photoData)
-    updatePhotoData({ ...photoData, [name]: value })
-    updateCaptionError('')
-  }
+  
 
-  async function handleSave(event) {
-    event.preventDefault()
-    if (!photoData.caption) {
-      updateCaptionError('Please add a caption to your photo')
-      return
-    } else {
-      try {
-        console.log(photoData.url)
-        console.log(cloudinaryURL)
-        await axios.post('/api/photos', photoData, {
-          headers: { Authorization: `Bearer ${token}` }
-        })
-        history.push('/explore')
-      } catch (err) {
-        console.log(err)
-        console.log(err.response)
-      }
-    }
-  }
+  
 
   function closeWelcomeMat() {
     updateWelcomeMat(true)
@@ -142,32 +119,6 @@ function PhotoUpload() {
         usageStatistics={true}
         ref={imageEditor}
       />
-      {saveModal && <div className='modal is-active'>
-        <div className='modal-background'></div>
-        <div className='modal-content'>
-          <div>
-            <img src={cloudinaryURL} />
-            <form className='field' onSubmit={handleSave}>
-              <div className='field'>
-                <div className='control'>
-                  <input className='input'
-                    type='text'
-                    value={photoData.caption}
-                    onChange={handleChange}
-                    name={'caption'}
-                    placeholder='Please add a photo caption'
-                  />
-                  {captionError && <small className='has-text-primary'>{captionError}</small>}
-                </div>
-              </div>
-              <div className="has-text-centered">
-                <button className="button is-hovered is-rounded" onClick={handleSave}>Save Photo</button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-      </div>}
       {!token && !welcomeMat && <div className='modal is-active has-text-centered has-text-white'>
         <div className='modal-background'></div>
         <div className='modal-content is-clipped has-text-centered'>
