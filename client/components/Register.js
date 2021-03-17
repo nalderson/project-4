@@ -78,8 +78,8 @@ export default function Register({ history }) {
   }
   
 
-  return <section className="hero is-danger is-fullheight">
-    <div className="hero-body" id="herobackground">
+  return <section className="hero is-fullheight">
+    <div className="hero-body" id="register-hero">
       <div className="container">
 
         <main className='column'>

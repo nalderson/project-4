@@ -110,12 +110,12 @@ export default function IndividualPhoto({ match }) {
     try {
       await axios.delete(`/api/photos/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
-      } )
+      })
       history.go(-1)
     } catch (err) {
       console.log(err)
     }
-    
+
   }
 
   return <section className="container is-vcentered ">
@@ -123,7 +123,7 @@ export default function IndividualPhoto({ match }) {
       <button className="button is-light is-rounded" id="back-button" onClick={goBack}>Back</button>
       {loggedIn && isCreator(getLoggedInUserId()) && <button className="button is-rounded" onClick={deletePhoto}>Delete Photo</button>}
       <div className="container is-vcentered block box is-three-quarters-desktop has-text-centered">
-        
+
         <img style={{ borderRadius: '10px' }} src={thisImage.url} alt={thisImage.caption} />
         <h4>{thisImage.caption}</h4>
         {loggedIn && <div className="has-text-right"><button className="button is-rounded" id="likeButton" onClick={likeButton}>❤️ {thisImage.rating}</button></div>}
@@ -132,12 +132,16 @@ export default function IndividualPhoto({ match }) {
       <div className="is-half-desktop " id="comments">
         {thisImage.comments && thisImage.comments.map(commenting => {
           return <article key={commenting.id} className="media is-half-desktop">
-            <div className="media-content is-half-desktop">
-              <p>{commenting.user.username}</p>
+            <div className="media-content is-half-desktop" id="comment-section">
               <img className="image is-64x64" src={commenting.user.profile_picture} />
               <div className="content">
                 <figure>
-                  <p id="commentingContent">{commenting.content}</p>
+                  <div id="commenting-user">
+                    <strong><p>{commenting.user.username}</p></strong>
+                  </div>
+                  <div>
+                    <p id="commentingContent">{commenting.content}</p>
+                  </div>
                 </figure>
               </div>
             </div>

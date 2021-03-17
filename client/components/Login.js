@@ -29,9 +29,9 @@ export default function Login({ history }) {
     }
   }
 
-  return <section className="hero is-danger is-fullheight">
-    <div className="hero-body" id="herobackground">
-      <div className="container" id="loginbackground">
+  return <section className="hero is-fullheight">
+    <div className="hero-body" id="login-hero">
+      <div className="container">
         <main className='column'>
           <div className='column is-flex is-flex-direction-column is-align-items-center'>
             <h1 className='titles'>Login</h1>

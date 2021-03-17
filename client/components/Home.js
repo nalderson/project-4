@@ -11,7 +11,7 @@ export default function Home() {
   // </section>
   
 
-  return <section className="hero is-fullheight header-image is-primary">
+  return <section className="hero is-fullheight header-image">
     <div className="hero-body">
       <div className="container has-text-centered">
         <p className="title">Welcome to Picster!</p>
