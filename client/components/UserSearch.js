@@ -42,7 +42,7 @@ export default function UserSearch() {
         />
       </div>
     </div>
-    <div className="container is-centered">
+    {/* <div className="container is-centered">
       <div className="columns is-multiline is-mobile is-centered">
         {filterUsers().map((user, index) => {
           return <div key={index} className="column is-one-third-desktop is-half-tablet is-half-mobile is-centered">
@@ -61,6 +61,16 @@ export default function UserSearch() {
           </div>
         })}
       </div>
-    </div>
+    </div> */}
+    <section className="container is-centered" id="photos">
+      {filterUsers().map((user, index) => {
+        return <div key={index} id="userDiv">
+          <Link to={`/profile/${user.id}`}>
+            <img id="userImg" src={user.profile_picture} alt={user.username} />
+          </Link>
+          <p id="userName" className="title">{user.username}</p>
+        </div>
+      })}
+    </section>
   </section>
 }

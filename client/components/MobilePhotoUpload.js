@@ -79,7 +79,7 @@ export default function MobilePhotoUpload() {
         </div>
         <div className='field'>
           <div className='control'>
-            <input className='input'
+            <input className='input is-rounded'
               type='text'
               value={photoData.caption}
               onChange={handleChange}

@@ -121,12 +121,12 @@ export default function IndividualPhoto({ match }) {
   return <section className="container is-vcentered ">
     <div>
       <button className="button is-light is-rounded" id="back-button" onClick={goBack}>Back</button>
+      {loggedIn && isCreator(getLoggedInUserId()) && <button className="button is-rounded" onClick={deletePhoto}>Delete Photo</button>}
       <div className="container is-vcentered block box is-three-quarters-desktop has-text-centered">
-        <button className="button is-rounded" onClick={goBack}>Back</button>
-        {loggedIn && isCreator(getLoggedInUserId()) && <button className="button is-rounded" onClick={deletePhoto}>Delete Photo</button>}
-        <img src={thisImage.url} alt={thisImage.caption} />
+        
+        <img style={{ borderRadius: '10px' }} src={thisImage.url} alt={thisImage.caption} />
         <h4>{thisImage.caption}</h4>
-        {loggedIn && <div className="has-text-right"><button onClick={likeButton}>❤️ {thisImage.rating}</button></div>}
+        {loggedIn && <div className="has-text-right"><button className="button is-rounded" id="likeButton" onClick={likeButton}>❤️ {thisImage.rating}</button></div>}
       </div>
       <h2 className="subtitle">Comments</h2>
       <div className="is-half-desktop " id="comments">
@@ -137,7 +137,7 @@ export default function IndividualPhoto({ match }) {
               <img className="image is-64x64" src={commenting.user.profile_picture} />
               <div className="content">
                 <figure>
-                  <p>{commenting.content}</p>
+                  <p id="commentingContent">{commenting.content}</p>
                 </figure>
               </div>
             </div>
@@ -166,7 +166,7 @@ export default function IndividualPhoto({ match }) {
         })}
       </div>
       {
-        loggedIn && <div>
+        loggedIn && <div className="mt-6">
           <textarea
             className="textarea"
             placeholder="Please write your comment"
@@ -176,7 +176,7 @@ export default function IndividualPhoto({ match }) {
           </textarea>
           {commentError && <small className='has-text-primary'>{commentError}</small>}
           <div>
-            <button onClick={postComment} className="button is-info">Submit</button>
+            <button onClick={postComment} className="button is-rounded m-3" id="my-profile">Submit</button>
           </div>
         </div>
       }

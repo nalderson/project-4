@@ -52,7 +52,7 @@ export default function PhotoSave({ location }) {
         <form className='field' onSubmit={handleSave}>
           <div className='field'>
             <div className='control'>
-              <input className='input'
+              <input className='input is-rounded'
                 type='text'
                 value={photoData.caption}
                 onChange={handleChange}

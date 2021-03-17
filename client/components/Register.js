@@ -90,7 +90,7 @@ export default function Register({ history }) {
               <div className='field'>
                 <label className='labels'>Username</label>
                 <div className='control'>
-                  <input className='input'
+                  <input className='input is-rounded'
                     type="text"
                     value={regData.username}
                     onChange={handleChange}
@@ -103,7 +103,7 @@ export default function Register({ history }) {
               <div className='field'>
                 <label className='labels'>Email</label>
                 <div className='control'>
-                  <input className='input'
+                  <input className='input is-rounded'
                     type="text"
                     value={regData.email}
                     onChange={handleChange}
@@ -116,7 +116,7 @@ export default function Register({ history }) {
               <div className='field'>
                 <label className='labels'>Password</label>
                 <div className='control'>
-                  <input className='input'
+                  <input className='input is-rounded'
                     type="password"
                     value={regData.password}
                     onChange={handleChange}
@@ -128,7 +128,7 @@ export default function Register({ history }) {
               <div className='field'>
                 <label className='labels'>Password Confirmation</label>
                 <div className='control'>
-                  <input className='input'
+                  <input className='input is-rounded'
                     type='password'
                     value={passwordConfirmationData.passwordConfirmation}
                     onChange={handlePasswordConfirmationChange}
