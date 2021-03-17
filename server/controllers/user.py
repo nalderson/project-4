@@ -15,6 +15,7 @@ following_schema = FollowingSchema()
 
 router = Blueprint(__name__, "users")
 
+
 @router.route("/signup", methods=["POST"])
 def signup():
 
@@ -22,7 +23,7 @@ def signup():
         user = user_schema.load(request.json)
 
     except ValidationError as e:
-        return { 'errors': e.messages, 'messages': 'Something went wrong.' }
+        return {'errors': e.messages, 'messages': 'Something went wrong.'}
 
     user.save()
 
@@ -35,20 +36,34 @@ def login():
     user = User.query.filter_by(email=request.json['email']).first()
 
     if not user:
-        return { 'message': 'No user found for this email.' }
+        return {'message': 'No user found for this email.'}
 
     if not user.validate_password(request.json['password']):
-        return { 'message' : 'Unauthorized.' }, 402
+        return {'message': 'Unauthorized.'}, 402
 
     token = user.generate_token()
 
-    return { 'token': token, 'message': 'Welcome back!' }
+    return {'token': token, 'message': 'Welcome back!'}
 
 
 @router.route('/profile', methods=['GET'])
 @secure_route
 def get_user_profile():
     return user_schema.jsonify(g.current_user)
+
+
+@router.route('/profile', methods=['DELETE'])
+@secure_route
+def delete_user_profile():
+
+    user = User.query.get(g.current_user.id)
+    try:
+        user.remove()
+    except ValidationError as e:
+        return {"errors": e.messages, "messages": "Something went wrong"}, 400
+
+    return {"message": "User profile deleted"}, 200
+
 
 @router.route('/profile/<int:user_id>', methods=['GET'])
 def get_a_profile(user_id):
@@ -59,20 +74,23 @@ def get_a_profile(user_id):
 
     return user_schema.jsonify(user), 200
 
+
 @router.route('/profile/<int:user_id>', methods=['POST'])
 @secure_route
 def add_a_follower(user_id):
-    
-    follow = Following(following_current_user_id=g.current_user.id, following_user_id=user_id)
+
+    follow = Following(
+        following_current_user_id=g.current_user.id, following_user_id=user_id)
     follow.save()
 
-    
     return "Well done, you made a new friend"
+
 
 @router.route('/users', methods=['GET'])
 def get_all_users():
     users = User.query.all()
     return user_schema.jsonify(users, many=True), 200
+
 
 @router.route('/profile/<int:user_id>', methods=['PUT'])
 @secure_route

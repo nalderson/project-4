@@ -2,6 +2,7 @@ import React, { useState, useEffect, Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import DisplayFollowing from './DisplayFollowing'
+import { useHistory } from 'react-router-dom'
 
 export default function Explore({ match }) {
 
@@ -20,7 +21,8 @@ export default function Explore({ match }) {
     profile_picture: ''
   })
   const [uploadSuccess, updateUploadSuccess] = useState(false)
-
+  const [deleteModalState, updateDeleteModalState] = useState(false)
+  const history = useHistory()
   useEffect(() => {
     async function getProfileData() {
       try {
@@ -77,9 +79,27 @@ export default function Explore({ match }) {
     }
   }
 
+  function openDeleteModal() {
+    updateDeleteModalState(!deleteModalState)
+  }
+
+  async function deleteProfile() {
+    try {
+      await axios.delete('/api/profile', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      localStorage.removeItem('token')
+      history.push('/')
+      location.reload()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return <div className="container is-vcentered">
     <div className="has-text-left">
       <button className="button is-rounded" id="update-profile" onClick={openModal}>Update Profile</button>
+      <button className="button is-rounded" onClick={openDeleteModal}>Delete Profile</button>
     </div>
     <div className="container is-vcentered" id="account-header">
       <img id="account-profile-pic" src={profile.profile_picture} />
@@ -132,5 +152,12 @@ export default function Explore({ match }) {
     </div>
 
     }
+    {deleteModalState && <div className='modal is-active has-text-centered has-text-white'>
+      <div className='modal-background'></div>
+      <div className='modal-content is-clipped has-text-centered'>
+        <p className='title has-text-white'>Are you sure you want to delete your profile?</p>
+        <br></br>
+        <button className='button is-rounded' onClick={deleteProfile}>Delete Profile</button>
+      </div></div>}
   </div>
 }

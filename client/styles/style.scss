@@ -1,3 +1,11 @@
+@charset "utf-8";
+
+$brand-pink: rgb(225,136,121);
+$info: $brand-pink;
+$success: $brand-pink;
+
+
+
 .header-image {
   background-image: url('https://images.squarespace-cdn.com/content/v1/5e9d994b2f1c2d4970c8acdb/1588449203708-31FQHIDPJ7BJH7DS37LZ/ke17ZwdGBToddI8pDm48kF0OLVcBpfeLArU44aYlu9h7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0vIHRucUU7a1Vci15HXS8HJfNvaWVx1ITdXEZlVZUBwpPgzugLHXTeT7NtT_SILjGA/DSC_0886.jpg?format=2500w');
   background-position: center center;
@@ -105,6 +113,7 @@ margin-right: 2px;
 .input-search {
   width: 50%;
   margin-bottom: 25px;
+  border-color: $brand-pink;
 }
 
 #edit {
@@ -147,3 +156,45 @@ background-color: rgba(0,0,0,0) !important;
   font-size: 17px;
   color: rgb(225,136,121);
 }
+
+@media only screen and (max-width: 1407px) {
+  #picsterTitle {
+    font-size:30px;
+  }
+}
+@media only screen and (max-width: 805px) {
+  #picsterTitle {
+    font-size:20px;
+  }
+}
+@media only screen and (max-width: 551px) {
+  #picsterTitle {
+    font-size:15px;
+  }
+}
+@media only screen and (max-width: 433px) {
+  #picsterTitle {
+    font-size:10px;
+  }
+}
+@media only screen and (max-width: 311px) {
+  #picsterTitle {
+    font-size:5px;
+  }
+}
+
+// @media screen and (-webkit-min-device-pixel-ratio:0) { 
+//   /* Safari only override */ 
+//   ::i-block-chrome, #userName { 
+//     display:none;  
+//   } 
+// }
+
+@media not all and (min-resolution:.001dpcm) 
+{ @supports (-webkit-appearance:none) {
+  #userName {
+    display: none;
+  }
+}}
+
+@import "../../node_modules/bulma/bulma.sass";

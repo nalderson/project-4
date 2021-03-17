@@ -36,7 +36,7 @@ export default function UserSearch() {
         <input
           type="text"
           placeholder="Search by name..."
-          className="input is-info is-rounded is-9 is-center is-light" id="input-search"
+          className="input is-info is-rounded is-9 is-center" id="input-search"
           onChange={(event) => handleChange(event)}
           value={filterTerm}
         />
