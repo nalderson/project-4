@@ -41,18 +41,16 @@ export default function DisplayFollowing(props) {
           <section className="modal-card-body">
             <div className="container is-centered">
               {profile.following_current_user.map((follower, index) => {
-                console.log(profile.following_current_user)
                 if (follower.following_user) {
-                  return <article key={index} className="media">
+                  return <article key={index} className="media columns">
                     <Link to={{ pathname: `/profile/${follower.following_user.id}` }}>
-                      <figure className="media-left">
+                      <figure className="media-left column">
                         <p className="image is-64x64">
                           <img src={follower.following_user.profile_picture} alt={follower.following_user.username} />
                         </p>
                       </figure>
                       <div className="media-content">
                         <div className="content">
-                          <h1>{console.log(follower.following_user.username)}</h1>
                           <p><br />
                             <strong>{follower.following_user.username}</strong>
                           </p>

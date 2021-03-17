@@ -49,7 +49,7 @@ export default function Explore({ match }) {
   }
   
   return <div className="container is-vcentered">
-    <div className="container is-vcentered block box" id="account-header">
+    <div className="container is-vcentered" id="account-header">
       <img id="account-profile-pic" src={profile.profile_picture} />
       <h1 id="account-title" className="title">{profile.username}</h1>
       <div className="container">

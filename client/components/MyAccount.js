@@ -81,7 +81,7 @@ export default function Explore({ match }) {
     <div className="has-text-left">
       <button className="button is-rounded" id="update-profile" onClick={openModal}>Update Profile</button>
     </div>
-    <div className="container is-vcentered block box" id="account-header">
+    <div className="container is-vcentered" id="account-header">
       <img id="account-profile-pic" src={profile.profile_picture} />
       <h1 id="account-title" className="title">{profile.username}</h1>
 
@@ -117,7 +117,7 @@ export default function Explore({ match }) {
         <div className='field'>
           <label className='labels'>Username</label>
           <div className='control'>
-            <input className='input'
+            <input className='input is-rounded'
               type="text"
               value={regData.username}
               onChange={handleChange}

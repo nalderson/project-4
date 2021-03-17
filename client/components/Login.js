@@ -39,7 +39,7 @@ export default function Login({ history }) {
               <div>
                 <label className='labels'>Email</label>
                 <div className='control'>
-                  <input className='input'
+                  <input className='input is-rounded'
                     type="text"
                     value={loginData.email}
                     onChange={handleChange}
@@ -50,7 +50,7 @@ export default function Login({ history }) {
               <div className='field'>
                 <label className='labels'>Password</label>
                 <div className='control'>
-                  <input className='input'
+                  <input className='input is-rounded'
                     type="password"
                     value={loginData.password}
                     onChange={handleChange}
