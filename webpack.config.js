@@ -13,7 +13,8 @@ module.exports = () => {
     entry: './client/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve('server/dist')
+      path: path.resolve('server/dist'),
+      publicPath: '/'
     },
     devtool: 'source-map',
     module: {
