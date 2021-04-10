@@ -8,7 +8,7 @@
 
 The project set by General Assembly was open - as a group of three we were tasked with created a full stack application using a Python with Flask back end and a React front end. We were givein one week to complete the project.
 
-We brain stormed our backgrounds, and with Joe's photography experience combined with Tash and Emily's strong skills in front end design, we thought it would be an exciting opportunity to build a photo editing and sharing app, taking inspiration from Instagram and Pinterest. 
+We brain stormed our backgrounds, and with Joe's photography experience combined with mine and Emily's strong skills in front end design, we thought it would be an exciting opportunity to build a photo editing and sharing app, taking inspiration from Instagram and Pinterest. 
 
 You can check out the website here: [](https://picster-project4.herokuapp.com/)
 
