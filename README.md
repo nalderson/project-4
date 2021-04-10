@@ -10,7 +10,7 @@ The project set by General Assembly was open - as a group of three we were taske
 
 We brain stormed our backgrounds, and with Joe's photography experience combined with mine and Emily's strong skills in front end design, we thought it would be an exciting opportunity to build a photo editing and sharing app, taking inspiration from Instagram and Pinterest. 
 
-You can check out the website here: [Picster](https://picster-project4.herokuapp.com/)
+You can check out the website here: [Picster](https://picster-gaproject.herokuapp.com/)
 
 ### The Brief
 
