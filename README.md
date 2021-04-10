@@ -1,9 +1,6 @@
-![GALogo](ReadMeImages/GALogo.png)
-
-### General Assembly Software Engineering Immersive
+### ![GA](https://cloud.githubusercontent.com/assets/40461/8183776/469f976e-1432-11e5-8199-6ac91363302b.png) General Assembly, Software Engineering Immersive
 
 # Project 4: Picster
-Testing 
 
 ![Homepage](ReadMeImages/HomePageScreenshot.png)
 
@@ -27,12 +24,10 @@ You can check out the website here: [](https://picster-gaproject.herokuapp.com/)
 
 #### Necessary Deliverables
 
-
 * A **working app** hosted on the internet
 *  A **link to your hosted working app** in the URL section of your Github repo
 *  A **git repository hosted on Github**, with a link to your hosted project, and frequent commits dating back to the _very beginning_ of the project
 *  **A `readme.md` file**
-
 
 ### Technologies Used:
 
