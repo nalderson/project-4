@@ -11,48 +11,38 @@ As a group of three we were tasked with creating a full stack application using 
 You can check out the website here: [Picster](https://picster-gaproject.herokuapp.com/)
 
 ### The Brief
-
-* **Build a full-stack application** by making your own backend and your own front-end
-* **Use a Python Flask API** using a Flask REST Framework to serve your data from a Postgres database
-* **Consume your API with a separate front-end** built with React
-* **Be a complete product** which most likely means multiple relationships and CRUD functionality for at least a couple of models
-* **Implement thoughtful user stories/wireframes** that are significant enough to help you know which features are core MVP and which you can cut
-* **Have a visually impressive design** to kick your portfolio up a notch and have something to wow future clients & employers. **ALLOW** time for this.
-* **Be deployed online** so it's publicly accessible.
-
-#### Necessary Deliverables
-
-* A **working app** hosted on the internet
-*  A **link to your hosted working app** in the URL section of your Github repo
-*  A **git repository hosted on Github**, with a link to your hosted project, and frequent commits dating back to the _very beginning_ of the project
-*  **A `readme.md` file**
+- Build a full-stack application by making your own backend and your own front-end
+- Use a Python Flask API using a Flask REST Framework to serve your data from a Postgres database
+- Consume your API with a separate front-end built with React
+- Be a complete product which most likely means multiple relationships and CRUD functionality for at least a couple of models
+- Implement thoughtful user stories/wireframes that are significant enough to help you know which features are core MVP and which you can cut
+- Have a visually impressive design to kick your portfolio up a notch and have something to wow future clients & employers
+- Be deployed online so it's publicly accessible
 
 ### Technologies Used:
-
-* HTML5
-* CSS3
-* SCSS
-* ES6
-* Git
-* Github
-* React.js
-* React Router
-* Node.js
-* Python
-* Pytest
-* Flask
-* Marshmallow
-* SQAlchemy
-* PostgreSQL
-* Bulma
-* Axios
-* Bcrypt
-* jsonwebtokekn
-* ToastUI
-* Cloudinary
+- HTML5
+- CSS3
+- SCSS
+- ES6
+- Git
+- Github
+- React.js
+- React Router
+- Node.js
+- Python
+- Pytest
+- Flask
+- Marshmallow
+- SQAlchemy
+- PostgreSQL
+- Bulma
+- Axios
+- Bcrypt
+- jsonwebtokekn
+- ToastUI
+- Cloudinary
 
 ### Planning:
-
 We used InVision to whiteboard out our project and plan each day / split tasks.
 
 Here was our user story whiteboard, which we did intialy to then work out what componenents we needed for both our back end and front end:
@@ -124,7 +114,7 @@ We used Cloudinary and integrated the Toast UI library in order to allow for pic
 
 Here is a screenshot of the image editor itself:
 
-![PhotoEditor](ReadMeImages/Project4ToastUI.png)
+![PhotoEditor](https://i.ibb.co/tsDjYYm/picster.png)
 
 We wanted the styling of Picster to be clean and similar to that of Instagram / Pinterest. Tash and Emily took ownership of the overall style of the website and worked with Bulma and SCSS to create a global style and the easy and vibrant user experience. We implemented some custom SCSS for our Explore page. As we allowed users to upload images of any size, we wanted these to be displayed dynamically, depending on their aspect ratio:
 
