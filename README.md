@@ -6,9 +6,7 @@
 
 ## The Overview:
 
-The project set by General Assembly was open - as a group of three we were tasked with created a full stack application using a Python with Flask back end and a React front end. We were givein one week to complete the project.
-
-We brain stormed our backgrounds, and with Joe's photography experience combined with mine and Emily's strong skills in front end design, we thought it would be an exciting opportunity to build a photo editing and sharing app, taking inspiration from Instagram and Pinterest. 
+As a group of three we were tasked with creating a full stack application using a Python with Flask back end and a React front end. We were given 5 days to complete the project. We decided on building a photo editing and sharing app, to see if we could build the same functionality as some of the most popular social media platforms. 
 
 You can check out the website here: [Picster](https://picster-gaproject.herokuapp.com/)
 
@@ -55,9 +53,9 @@ You can check out the website here: [Picster](https://picster-gaproject.herokuap
 
 ### Planning:
 
-Keen to work as smoothly as possible, given the short time constraints, we utilised InVision to whiteboard our project. Joe used his experience in project management to create plans, timeframes and set tasks accordingly. This proved invaluable in the group's time management. 
+We used InVision to whiteboard out our project and plan each day / split tasks.
 
-Here was our user story plan:
+Here was our user story whiteboard, which we did intialy to then work out what componenents we needed for both our back end and front end:
 
 ![UserStoryPlan](ReadMeImages/Project4UserStoryPlan.png)
 
@@ -171,67 +169,16 @@ async function handleSubmit(event) {
   
   ![RegistrationErrors](ReadMeImages/Project4ErrorHandling.png)
   
-
-
-
 ## Challenges
-
-### Many to Many Relationship: Followers
-
-Our biggest challenge on the back end was creating the correct relationship to allow users to follow each other. 
-
-Joe worked initially on a one-to-many relationship for each user, whereby each user could have many followers, and each user could also follow many users.
-
-However, it became clear that this would be better implemented with all users having a join table, that would show for any user how many people followed them, and how many they followed. 
-
-After some difficulty, this was implemented and the schema created so not only could we see followers on the front end, but also see their images, their IDs, and link to their profiles. 
-
-### Error Validation
-
-A challenge occurred with error validation for registration and login, whereby our back end was not providing us with information on a faulty attempted registration. 
-
-Emily worked to solve this, finding a solution in changing the status code for a failed attempt, and using middleware to provide different failure case error validation messages. 
+Our biggest challenge on the back end was creating the correct relationship to allow users to follow each other. After experiementing with a one-top-many relationship for each user, it became clear a join table would be more suited. This was implemented and the schema created so not only could we see followers on the front end, but also see their images, their IDs, and link to their profiles. 
 
 ## Wins
-
-### Photo Editing Library
-
-It was always our intent to offer some photo editing for our users, such as adding filters, or basic manipulation. 
-
-Originally, Joe looked at python computer vision libraries such as Scikit and Pillow. However, doing all the editing on server side could implicate higher costs to a fully functioning app, so the plan was revised to look for a client side editing suite. 
-
-Settling on ToastUI, Joe integrated this library and the end result works really well, except for one small bug! 
-
-Half way through the project, ToastUI inplemented an update which disabled the space bar on our website, so we had to write a small message to ask users to refresh their page after upload to allow them to type correctly. We are hoping by the time you read this ToastUI have fixed the bug.
-
-### Responsive Tiling
-
-Taking inspiration from Pinterest, we wanted our users to be able to upload photos of any aspect ratio and have them fit seamlessly together. We looked at several libraries, but in the end, Joe wrote some custom CSS to create a fully responsive system which would always reconfigure the images so that they fit in a tiled pattern and occupy the whole page. 
-
+- It was always our intent to offer some photo editing for our users, such as adding filters, or basic manipulation. Settling on ToastUI, we integrated this library and the end result works really well, except for one small bug! Half way through the project, ToastUI inplemented an update which disabled the space bar on our website, so we had to write a small message to ask users to refresh their page after upload to allow them to type correctly. We are hoping by the time you read this ToastUI have fixed the bug
+- Taking inspiration from Pinterest, we wanted our users to be able to upload photos of any aspect ratio and have them fit seamlessly together. In the end we wrote some custom CSS for this:
 ![Tiledhomepage](ReadMeImages/Project4Tiling.png) 
-
-### Mobile Friendly
-
-Knowing that everyone likes to take and upload pictures on their phones, we wanted to make Picster mobile friendly. 
-
-Using Bulma's responsive framework designs, we all made sure that each page we created was scaleable for mobile. 
-
-The only feature we weren't able to make mobile friendly was our image editor. 
+- Knowing that everyone likes to take and upload pictures on their phones, we wanted to make Picster mobile friendly. Using Bulma's responsive framework designs, we all made sure that each page we created was scaleable for mobile. The only feature we weren't able to make mobile friendly was our image editor
 
 ## Future Features
-
-### Mobile Image Editor
-
-Given more time, we would have created an image editor which worked on mobile. 
-
-### Instant Messenger
-
-We would have loved to add more user actions, including an instant messenger, or at least a mail messenger system. 
-
-We looked at creating the necessary back end models for messenging, but had to prioritise the main funcitonality first. 
-
-### Follower Timeline
-
-We would also like to implement a changeable timeline, so you can either see 'all photos' posted to the home page, or just your 'follower photos'. 
-
-Given more users, photos and user data, this could be quite easy to implement in React, and is something for future consideration. 
+- Given more time, we would have created an image editor which worked on mobile
+- We would have loved to add more user actions, including an instant messenger, or at least a mail messenger system. We looked at creating the necessary back end models for messenging, but had to prioritise the main funcitonality first
+- We would also like to implement a changeable timeline, so you can either see 'all photos' posted to the home page, or just your 'follower photos'
