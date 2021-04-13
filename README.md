@@ -168,6 +168,11 @@ Our biggest challenge on the back end was creating the correct relationship to a
 ![Tiledhomepage](ReadMeImages/Project4Tiling.png) 
 - Knowing that everyone likes to take and upload pictures on their phones, we wanted to make Picster mobile friendly. Using Bulma's responsive framework designs, we all made sure that each page we created was scaleable for mobile. The only feature we weren't able to make mobile friendly was our image editor
 
+## Key Learnings
+- After learning Python for a week and a half prior to starting this project, it was great to put what I had learnt into practice 
+- I developed a test suite using the pytest framework, to ensure our comment endpoints correctly returned the expected response. This was great, as I wasn't confident in writing tests before the project
+- This definitely further solidified my understanding of React 
+
 ## Future Features
 - Given more time, we would have created an image editor which worked on mobile
 - We would have loved to add more user actions, including an instant messenger, or at least a mail messenger system. We looked at creating the necessary back end models for messenging, but had to prioritise the main funcitonality first
